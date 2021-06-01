@@ -21,11 +21,9 @@ create table if not exists Persona(
   Nombre varchar(64) not null,
   ApePaterno varchar(64) not null,
   ApeMaterno varchar(64) not null,
-  Usuario varchar(64) not null,
-  Contrasenia varchar(64) not null,
+  Usuario varchar(64) not null,  
   idTipoUsuario int(2) not null,
-  foreign key (Usuario) references Credencial(Usuario) on delete cascade on update cascade,
-  foreign key (Contrasenia) references Credencial(Contrasenia) on delete cascade on update cascade,
+  foreign key (Usuario) references Credencial(Usuario) on delete cascade on update cascade,  
   foreign key (idTipoUsuario) references TipoUsuario(idTipoUsuario) on delete cascade on update cascade
 );
 
@@ -101,7 +99,8 @@ create table if not exists Mensaje(
 );
 
 
-
+-- SP Necesarios:
+-- sp_ConsultaPublicaciones
 
 
 
