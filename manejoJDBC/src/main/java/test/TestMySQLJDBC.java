@@ -13,15 +13,15 @@ public class TestMySQLJDBC {
         var url = "jdbc:mysql://localhost:3306/prueba?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
         try {
             //Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conexion = DriverManager.getConnection(url,"root","2015170921rami99");
+            Connection conexion = DriverManager.getConnection(url,"root","1234");
             Statement instruccion = conexion.createStatement();
-            var sql = "SELECT correoCliente, nombre, contraseña FROM cliente";
+            var sql = "SELECT * FROM TipoUsuario";
             ResultSet resultado = instruccion.executeQuery(sql);
             while(resultado.next()){
-                System.out.println("correoCliente:" + resultado.getString("correoCliente"));
-                System.out.println("nombre:" + resultado.getString("nombre"));
-                System.out.println("contraseña:" + resultado.getString("contraseña"));
+                System.out.print(resultado.getString("idTipoUsuario")+"  ");
+                System.out.println(resultado.getString("Descripcion"));
             }
+            resultado.close();
         }catch (SQLException ex) {
             ex.printStackTrace(System.out);
         }

@@ -17,18 +17,28 @@ public class conexion {
        return  DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
     }
     
-    public static void close(ResultSet rs) throws SQLException{
-        rs.close();
+    public static void close(ResultSet rs){
+        try {
+            rs.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
     }
     
-    public static void close(Statement smtm) throws SQLException{
-        smtm.close();
-    }
-    public static void close(PreparedStatement smtm) throws SQLException{
-        smtm.close();
+    public static void close(PreparedStatement stmt){
+        try {
+            stmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
     }
     
-    public static void close(Connection conn) throws SQLException{
-        conn.close();
+    public static void close(Connection conn){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+           ex.printStackTrace(System.out);
+        }
     }
+    
 }

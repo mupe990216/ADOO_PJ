@@ -66,6 +66,11 @@ public class LogIn extends javax.swing.JFrame {
         Panel.add(Tipo_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 140, 40));
 
         Caja_Usuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Caja_Usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Caja_UsuarioActionPerformed(evt);
+            }
+        });
         Panel.add(Caja_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 170, -1));
 
         Caja_TUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -167,6 +172,10 @@ public class LogIn extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "Tipo de Usuario incorrecto :'v");
       }
     }//GEN-LAST:event_Iniciar_SesionActionPerformed
+
+    private void Caja_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Caja_UsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Caja_UsuarioActionPerformed
 
     /* @param args the command line arguments*/
     public static void main(String args[]) {
