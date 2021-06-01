@@ -2,7 +2,15 @@ drop database if exists prueba;
 create database prueba;
 use prueba;
 
-create table if not exists 
+create table if not exists persona(
+  Email varchar(64) not null primary key,
+  Nombre varchar(64) not null,
+  ApePaterno varchar(64) not null,
+  ApeMaterno varchar(64) not null,
+  Usuario varchar(64) not null,
+  Contrasenia varchar(64) not null,
+  
+);
 
 
 CREATE SCHEMA IF NOT EXISTS `prueba` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
