@@ -28,7 +28,8 @@ public class A_GC extends javax.swing.JFrame {
     private void initComponents() {
 
         panel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        E_Logo = new javax.swing.JLabel();
+        E_Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Say Woof! - Administrador - Gestionar Clientes");
@@ -36,8 +37,11 @@ public class A_GC extends javax.swing.JFrame {
         panel.setBackground(new java.awt.Color(255, 255, 255));
         panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo_azul_horizontal.png"))); // NOI18N
-        panel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 100));
+        E_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/LOGO_3.png"))); // NOI18N
+        panel.add(E_Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        E_Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo_azul_horizontal.png"))); // NOI18N
+        panel.add(E_Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 100));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,7 +94,8 @@ public class A_GC extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel E_Fondo;
+    private javax.swing.JLabel E_Logo;
     private javax.swing.JPanel panel;
     // End of variables declaration//GEN-END:variables
 }
