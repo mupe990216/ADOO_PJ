@@ -6,7 +6,6 @@ declare existe int;
 declare msj varchar(64);
 #declare tipoUSR int;
 declare tipoUSR varchar(64);
-
 set existe = (select count(*) from Credencial where Credencial.Usuario = usr);
 	if existe = 0 then
 		set msj = 'No existe el usuario';
@@ -18,7 +17,6 @@ set existe = (select count(*) from Credencial where Credencial.Usuario = usr);
             set tipoUSR = 'null';
         else
 			set msj = 'Acceso Concedido';
-            #set tipoUSR = (select idTipoUsuario from Persona where Persona.Usuario = usr);
             set tipoUSR = (select Descripcion from TipoUsuario where TipoUsuario.idTipoUsuario = (select idTipoUsuario from Persona where Persona.Usuario = usr));
         end if;		
 	end if;
@@ -26,8 +24,13 @@ set existe = (select count(*) from Credencial where Credencial.Usuario = usr);
 end **
 delimiter ;
 
+
+-- Seccion de prueba para ir checando la BD --
 insert into Credencial values('usr01','123');
-insert into Persona values('hola@hola.com','Tu Gfa','No se we','Que te importa','usr01',1);
+insert into Persona values('admin@admin.com','Admin','No se we','Que te importa','usr01',1);
+
+insert into Credencial values('usr02','123');
+insert into Persona values('client@client.com','Client','No se we','Que te importa','usr02',2);
 
 call sp_Login('usr01','123');
 

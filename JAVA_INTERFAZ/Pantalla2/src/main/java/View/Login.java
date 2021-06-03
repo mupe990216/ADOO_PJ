@@ -109,6 +109,8 @@ public class Login extends javax.swing.JFrame {
         try {
             Connection conn = datitos.conecta();
             ResultSet rs = datitos.consulta("call sp_Login('"+usuario+"','"+contras+"');", conn);
+            vMenuAdmin ventanita = new vMenuAdmin();
+            ventanita.setVisible(true);
             while (rs.next()) {
                 JOptionPane.showMessageDialog(null, rs.getString("Respuesta"));
                 JOptionPane.showMessageDialog(null, rs.getString("tipoUSR"));
