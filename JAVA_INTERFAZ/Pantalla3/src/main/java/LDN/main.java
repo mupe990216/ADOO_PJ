@@ -6,7 +6,6 @@ public class main {
     
     public static void main(String args[]){
         vLogin Proyecto = new vLogin();
-        Proyecto.setVisible(true);
-        System.out.println(Proyecto);
+        Proyecto.setVisible(true);        
     }
 }
