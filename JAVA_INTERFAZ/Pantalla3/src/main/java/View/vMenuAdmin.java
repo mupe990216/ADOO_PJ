@@ -29,8 +29,6 @@ public class vMenuAdmin extends JFrame implements ActionListener { //implements 
     public JLabel jbl_clie;
     public JLabel jbl_publ;
     public JLabel jbl_foro;
-    public JLabel usr;
-    public JLabel psw;
     
     public vMenuAdmin() {
         setSize(950, 600);
@@ -44,15 +42,14 @@ public class vMenuAdmin extends JFrame implements ActionListener { //implements 
     //METODO DE INICIAR COMPONENTES
     private void iniciaComponentes() {
         colocaPanel();
-        colocaFondo();
-        //colocaBotonCerrarSesion();
-        //colocaBotonMiCuenta();
-        //colocaBoton_gestAdmin();
-        //colocaBoton_gestClien();
-        //colocaBoton_gestPublic();
-        //colocaBoton_gestForo();
-        colocaEtiqueta_Admin();
+        colocaBotonCerrarSesion();
+        colocaBotonMiCuenta();
+        colocaBoton_gestAdmin();
+        colocaBoton_gestClien();
+        colocaBoton_gestPublic();
+        colocaBoton_gestForo();
         colocaEtiquetas();
+        colocaFondo();
     }
 
     //PANEL
@@ -76,7 +73,7 @@ public class vMenuAdmin extends JFrame implements ActionListener { //implements 
     //BOTON MI CUENTA
     private void colocaBotonMiCuenta(){
         btn_mi_cuenta = new JButton("Mi Cuenta");
-        btn_mi_cuenta.setBounds(400,480,180,50);
+        btn_mi_cuenta.setBounds(500,480,180,50);
         btn_mi_cuenta.setFont(new Font("arial",1,22));
         btn_mi_cuenta.setBackground(new Color(185, 170, 220));
         panel.add(btn_mi_cuenta);
@@ -129,29 +126,38 @@ public class vMenuAdmin extends JFrame implements ActionListener { //implements 
    }
    
     //ETIQUETA ADMIN
-    private void colocaEtiqueta_Admin(){
+    private void colocaEtiquetas(){
+        //Etiquta de gestion de administradores
         jbl_admin = new JLabel();
         jbl_admin.setText("Gestionar Administradores");
-        //jbl_admin.setOpaque(true);
-        jbl_admin.setFont(new Font("arial",1,30));
+        jbl_admin.setFont(new Font("arial",1,14));
         jbl_admin.setForeground(Color.WHITE);
-        jbl_admin.setBounds(200, 200, 50, 30);
+        jbl_admin.setBounds(90, 200, 210, 30);
         panel.add(jbl_admin);
-    }
-     private void colocaEtiquetas() {
-        usr = new JLabel();
-        usr.setBounds(0, 0, 110, 15);
-        usr.setText("Usuario");
-        usr.setForeground(Color.WHITE);
-        usr.setFont(new Font("arial", 1, 18));
-        panel.add(usr);
-
-        psw = new JLabel();
-        psw.setBounds(20, 20, 110, 15);
-        psw.setText("Contraseña");
-        psw.setForeground(Color.WHITE);
-        psw.setFont(new Font("arial", 1, 18));
-        panel.add(psw);
+        
+        //Etiquta de gestion de clientes
+        jbl_clie = new JLabel();
+        jbl_clie.setText("Gestionar Clientes");
+        jbl_clie.setFont(new Font("arial",1,14));
+        jbl_clie.setForeground(Color.WHITE);
+        jbl_clie.setBounds(415, 200, 210, 30);
+        panel.add(jbl_clie);
+        
+        //Etiqueta de gestion de publicaciones
+        jbl_publ = new JLabel();
+        jbl_publ.setText("Gestionar Publicaciones");
+        jbl_publ.setFont(new Font("arial",1,14));
+        jbl_publ.setForeground(Color.WHITE);
+        jbl_publ.setBounds(100, 380, 210, 30);
+        panel.add(jbl_publ);
+        
+        //Etiqueta de gestion de Foros
+        jbl_foro = new JLabel();
+        jbl_foro.setText("Gestionar Foros");
+        jbl_foro.setFont(new Font("arial",1,14));
+        jbl_foro.setForeground(Color.WHITE);
+        jbl_foro.setBounds(420, 380, 210, 30);
+        panel.add(jbl_foro);
     }
 
     //COLOCAR FONDO 

@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class vLogin extends JFrame implements ActionListener {
@@ -23,6 +24,8 @@ public class vLogin extends JFrame implements ActionListener {
     public JTextField jtf_usuario, jtf_contrasenia;
     public JButton btn_Ingresa;
     public JLabel fondo, usr, psw;
+    public JPasswordField contra;
+
 
     public vLogin() {
         setSize(405, 600);
@@ -36,6 +39,7 @@ public class vLogin extends JFrame implements ActionListener {
     private void iniciaComponentes() {
         colocaPanel();
         colocaTextFiled();
+        colocaPasswordField();
         colocaEtiquetas();
         colocaBoton();
         colocaFondo();
@@ -55,12 +59,20 @@ public class vLogin extends JFrame implements ActionListener {
         jtf_usuario.setBackground(new Color(180, 210, 240));
         panel.add(jtf_usuario);
 
-        jtf_contrasenia = new JTextField();
-        jtf_contrasenia.setBounds(100, 175, 200, 50);
-        jtf_contrasenia.setFont(new Font("arial", 1, 22));
-        jtf_contrasenia.setBackground(new Color(180, 210, 240));
-        panel.add(jtf_contrasenia);
+        //jtf_contrasenia = new JTextField();
+        //jtf_contrasenia.setBounds(100, 175, 200, 50);
+        //jtf_contrasenia.setFont(new Font("arial", 1, 22));
+        //jtf_contrasenia.setBackground(new Color(180, 210, 240));
+        //panel.add(jtf_contrasenia);
     }
+    
+     public void colocaPasswordField(){
+         contra = new JPasswordField();
+         contra.setBounds(100,175,200,50);
+         contra.setFont(new Font("arial", 1, 22));
+         contra.setBackground(new Color(180, 210, 240));
+         panel.add(contra);
+     }
 
     private void colocaEtiquetas() {
         usr = new JLabel();
@@ -100,7 +112,11 @@ public class vLogin extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btn_Ingresa) {
             String usuario = jtf_usuario.getText();
-            String contras = jtf_contrasenia.getText();            
+            //String contras = jtf_contrasenia.getText();
+            String contras = "";
+            for(int i = 0; i< contra.getPassword().length;i++ ){
+                contras += contra.getPassword()[i];
+            }
             cDatos datitos = new cDatos();
             try {
                 Connection conn = datitos.conecta(); //Conecta Java con MySQL y regresa un objeto del tipo connection

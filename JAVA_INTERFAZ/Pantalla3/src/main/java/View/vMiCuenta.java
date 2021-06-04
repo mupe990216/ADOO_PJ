@@ -17,12 +17,16 @@ import javax.swing.JPanel;
 public class vMiCuenta extends JFrame implements ActionListener{
     //ATRIBUTOS
     public JPanel panel;
-    public JLabel jbl_fondo,usr,psw;
+    public JLabel jbl_fondo;
+    public JLabel usr,psw;
     public JButton btn_cerrar_sesion;
+    public JButton btn_regresar;
+    public JButton btn_actualiza_info;
+    
     
     //CONTRUCTOR DE VENTANA
     public vMiCuenta(){
-        setSize(950, 600);
+        setSize(500, 450);
         setTitle("Mi Cuenta");
         setLocationRelativeTo(null);
         setResizable(false);        
@@ -35,22 +39,20 @@ public class vMiCuenta extends JFrame implements ActionListener{
         //AQUI LLAMAMOS TODOS LOS METODOS DE CADA COMPONENTE DE LA VENTANA
         colocaPanel();
         colocaFondo();
-        colocaEtiquetas();
-        
         
         
     }
     //ETIQUETAS
-    private void colocaEtiquetas() {
+     private void colocaEtiquetas() {
         usr = new JLabel();
-        usr.setBounds(0, 0, 110, 15);
+        usr.setBounds(100, 50, 110, 15);
         usr.setText("Usuario");
         usr.setForeground(Color.WHITE);
         usr.setFont(new Font("arial", 1, 18));
         panel.add(usr);
 
         psw = new JLabel();
-        psw.setBounds(20, 20, 110, 15);
+        psw.setBounds(100, 150, 110, 15);
         psw.setText("Contraseña");
         psw.setForeground(Color.WHITE);
         psw.setFont(new Font("arial", 1, 18));
