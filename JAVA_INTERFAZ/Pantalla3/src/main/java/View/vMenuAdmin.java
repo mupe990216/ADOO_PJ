@@ -11,13 +11,27 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
-public class vMenuAdmin extends JFrame implements ActionListener {
+public class vMenuAdmin extends JFrame implements ActionListener { //implements ActionListener
 
     public JPanel panel;
     public JLabel fondo;
+    //Botones
     public JButton btn_cerrar_Sesion;
-
+    public JButton btn_mi_cuenta;
+    public JButton btn_gestAdmin;
+    public JButton btn_gestClien;
+    public JButton btn_gestPublic;
+    public JButton btn_gestForo;
+    //etiquetas
+    public JLabel jbl_admin;
+    public JLabel jbl_clie;
+    public JLabel jbl_publ;
+    public JLabel jbl_foro;
+    public JLabel usr;
+    public JLabel psw;
+    
     public vMenuAdmin() {
         setSize(950, 600);
         setTitle("Menu Administrador");
@@ -27,12 +41,21 @@ public class vMenuAdmin extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
+    //METODO DE INICIAR COMPONENTES
     private void iniciaComponentes() {
         colocaPanel();
         colocaFondo();
-        colocaBoton();
+        //colocaBotonCerrarSesion();
+        //colocaBotonMiCuenta();
+        //colocaBoton_gestAdmin();
+        //colocaBoton_gestClien();
+        //colocaBoton_gestPublic();
+        //colocaBoton_gestForo();
+        colocaEtiqueta_Admin();
+        colocaEtiquetas();
     }
 
+    //PANEL
     private void colocaPanel() {
         panel = new JPanel();
         panel.setLayout(null);
@@ -40,15 +63,98 @@ public class vMenuAdmin extends JFrame implements ActionListener {
         this.getContentPane().add(panel);
     }
 
-    private void colocaBoton() {
+    //BOTON CERRAR SESION
+    private void colocaBotonCerrarSesion() {
         btn_cerrar_Sesion = new JButton("Cerrar Sesion");
-        btn_cerrar_Sesion.setBounds(700, 480, 200, 50);
+        btn_cerrar_Sesion.setBounds(700, 480, 180, 50);
         btn_cerrar_Sesion.setFont(new Font("arial", 1, 22));
         btn_cerrar_Sesion.setBackground(new Color(185, 170, 220));
         panel.add(btn_cerrar_Sesion);
         btn_cerrar_Sesion.addActionListener(this);
     }
+    
+    //BOTON MI CUENTA
+    private void colocaBotonMiCuenta(){
+        btn_mi_cuenta = new JButton("Mi Cuenta");
+        btn_mi_cuenta.setBounds(400,480,180,50);
+        btn_mi_cuenta.setFont(new Font("arial",1,22));
+        btn_mi_cuenta.setBackground(new Color(185, 170, 220));
+        panel.add(btn_mi_cuenta);
+        btn_mi_cuenta.addActionListener(this);
+        
+    }
+    //BOTON GESTADMIN
+    private void colocaBoton_gestAdmin(){
+        btn_gestAdmin = new JButton();
+        btn_gestAdmin.setBounds(100, 100, 160, 100);
+        ImageIcon i1 = new ImageIcon("./img/Administrador/Admin.png");
+        btn_gestAdmin.setIcon(new ImageIcon(i1.getImage().getScaledInstance(btn_gestAdmin.getWidth(), btn_gestAdmin.getHeight(), Image.SCALE_SMOOTH)));
+       // btn_gestAdmin.setFont(new Font("arial", 1, 22));
+        btn_gestAdmin.setBackground(new Color(185, 170, 220));
+        panel.add(btn_gestAdmin);
+        btn_gestAdmin.addActionListener(this);
+    }
+    //BOTON GESTCLIEN
+    private void colocaBoton_gestClien(){
+        btn_gestClien = new JButton();
+        btn_gestClien.setBounds(400, 100, 160, 100);
+        ImageIcon i1 = new ImageIcon("./img/Cliente/Usuario_icono.png");
+        btn_gestClien.setIcon(new ImageIcon(i1.getImage().getScaledInstance(btn_gestClien.getWidth(), btn_gestClien.getHeight(), Image.SCALE_SMOOTH)));
+       // btn_gestAdmin.setFont(new Font("arial", 1, 22));
+        btn_gestClien.setBackground(new Color(185, 170, 220));
+        panel.add(btn_gestClien);
+        btn_gestClien.addActionListener(this);
+    }
+    //BOTON GESTPUBLIC
+    private void colocaBoton_gestPublic(){
+        btn_gestPublic = new JButton();
+        btn_gestPublic.setBounds(100, 280, 160, 100);
+        ImageIcon i1 = new ImageIcon("./img/publicacion.png");
+        btn_gestPublic.setIcon(new ImageIcon(i1.getImage().getScaledInstance(btn_gestPublic.getWidth(), btn_gestPublic.getHeight(), Image.SCALE_SMOOTH)));
+       // btn_gestAdmin.setFont(new Font("arial", 1, 22));
+        btn_gestPublic.setBackground(new Color(185, 170, 220));
+        panel.add(btn_gestPublic);
+        btn_gestPublic.addActionListener(this);
+    }
+    //BOTON GESTFORO
+    private void colocaBoton_gestForo(){
+        btn_gestForo = new JButton();
+        btn_gestForo.setBounds(400, 280, 160, 100);
+        ImageIcon i1 = new ImageIcon("./img/foro.png");
+        btn_gestForo.setIcon(new ImageIcon(i1.getImage().getScaledInstance(btn_gestForo.getWidth(), btn_gestForo.getHeight(), Image.SCALE_SMOOTH)));
+       // btn_gestAdmin.setFont(new Font("arial", 1, 22));
+        btn_gestForo.setBackground(new Color(185, 170, 220));
+        panel.add(btn_gestForo);
+        btn_gestForo.addActionListener(this);
+   }
+   
+    //ETIQUETA ADMIN
+    private void colocaEtiqueta_Admin(){
+        jbl_admin = new JLabel();
+        jbl_admin.setText("Gestionar Administradores");
+        //jbl_admin.setOpaque(true);
+        jbl_admin.setFont(new Font("arial",1,30));
+        jbl_admin.setForeground(Color.WHITE);
+        jbl_admin.setBounds(200, 200, 50, 30);
+        panel.add(jbl_admin);
+    }
+     private void colocaEtiquetas() {
+        usr = new JLabel();
+        usr.setBounds(0, 0, 110, 15);
+        usr.setText("Usuario");
+        usr.setForeground(Color.WHITE);
+        usr.setFont(new Font("arial", 1, 18));
+        panel.add(usr);
 
+        psw = new JLabel();
+        psw.setBounds(20, 20, 110, 15);
+        psw.setText("Contraseña");
+        psw.setForeground(Color.WHITE);
+        psw.setFont(new Font("arial", 1, 18));
+        panel.add(psw);
+    }
+
+    //COLOCAR FONDO 
     private void colocaFondo() {
         ImageIcon logo_icono = new ImageIcon("./img/Fondo.png");
         fondo = new JLabel();
@@ -56,9 +162,14 @@ public class vMenuAdmin extends JFrame implements ActionListener {
         fondo.setIcon(new ImageIcon(logo_icono.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH)));
         panel.add(fondo);
     }
-
+    
+    //EVENTOS 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    //Aqui va el codigo que quite XD
+    
+        public void actionPerformed(ActionEvent e) {
+        //getSource significa al apretar el boton XD
+        //evento para el boton de Cerrar Sesion
         if (e.getSource() == btn_cerrar_Sesion) {
             int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea salir del sistema?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (respuesta == 0) {
@@ -71,5 +182,13 @@ public class vMenuAdmin extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Sigueme Usando UwU");
             }
         }
+        
+        //evento para el boton de Mi cuenta
+            if(e.getSource() == btn_mi_cuenta){
+            vMiCuenta cuenta = new vMiCuenta();
+            cuenta.setVisible(true);
+            this.dispose();
+        }
     }
+    
 }

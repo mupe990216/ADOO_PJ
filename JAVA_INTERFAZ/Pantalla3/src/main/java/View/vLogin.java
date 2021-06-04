@@ -94,7 +94,8 @@ public class vLogin extends JFrame implements ActionListener {
         fondo.setIcon(new ImageIcon(logo_icono.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH)));
         panel.add(fondo);
     }
-
+    
+    //EVENTOS
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btn_Ingresa) {

@@ -17,7 +17,7 @@ public class cDatos {
     private static final String JDBC_DB_NAME = "prueba";
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/" + JDBC_DB_NAME + "?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     private static final String JDBC_USER = "root";
-    private static final String JDBC_PASSWORD = "1234";
+    private static final String JDBC_PASSWORD = "Emo10blanco+";
     private Statement estancia;
 
     /*
