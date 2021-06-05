@@ -12,21 +12,28 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class vMiCuenta extends JFrame implements ActionListener{
     //ATRIBUTOS
     public JPanel panel;
     public JLabel jbl_fondo;
-    public JLabel usr,psw;
+    public JLabel jbl_apellidos, jbl_nombre,jbl_email,usr,psw;
     public JButton btn_cerrar_sesion;
     public JButton btn_regresar;
-    public JButton btn_actualiza_info;
-    
+    public JButton btn_actualiza_info, btn_save;
+    public JTextField jtf_apellidos;
+    public JTextField jtf_nombres;
+    public JTextField jtf_email;
+    public JTextField jtf_usr;
+    public JPasswordField jtf_psw;
     
     //CONTRUCTOR DE VENTANA
     public vMiCuenta(){
-        setSize(500, 450);
+        setSize(800, 550);
         setTitle("Mi Cuenta");
         setLocationRelativeTo(null);
         setResizable(false);        
@@ -38,26 +45,133 @@ public class vMiCuenta extends JFrame implements ActionListener{
     public void iniciaComponentes(){
         //AQUI LLAMAMOS TODOS LOS METODOS DE CADA COMPONENTE DE LA VENTANA
         colocaPanel();
+        colocaBotones();
+        colocaCajasTexto();
+        colocaEtiquetas();
         colocaFondo();
-        
-        
     }
+    //Cajas de Texto
+    private void colocaCajasTexto(){
+        //Caja de apellidos
+        jtf_apellidos = new JTextField();
+        jtf_apellidos.setBounds(50,50,200,40);
+        jtf_apellidos.setFont(new Font("arial", 1, 18));
+        //jtf_apellidos.setText("Ramirez Galindo");
+        jtf_apellidos.setBackground(new Color(180, 210, 240));
+        jtf_apellidos.setEditable(false);
+        panel.add(jtf_apellidos);
+        
+        //Caja de nombres
+        jtf_nombres = new JTextField();
+        jtf_nombres.setBounds(50,170,200,40);
+        jtf_nombres.setFont(new Font("arial", 1, 18));
+        jtf_nombres.setBackground(new Color(180, 210, 240));
+        jtf_nombres.setEditable(false);
+        panel.add(jtf_nombres);
+        
+        //Caja de email
+        jtf_email = new JTextField();
+        jtf_email.setBounds(50,290,200,40);
+        jtf_email.setFont(new Font("arial", 1, 18));
+        jtf_email.setBackground(new Color(180, 210, 240));
+        jtf_email.setEditable(false);
+        panel.add(jtf_email);
+        
+        //Caja de usr
+        jtf_usr = new JTextField();
+        jtf_usr.setBounds(300,50,200,40);
+        jtf_usr.setFont(new Font("arial", 1, 18));
+        jtf_usr.setBackground(new Color(180, 210, 240));
+        jtf_usr.setEditable(false);
+        panel.add(jtf_usr);
+        
+        //Caja psw
+        jtf_psw = new JPasswordField();
+        jtf_psw.setBounds(300,170,200,40);
+        jtf_psw.setFont(new Font("arial", 1, 18));
+        jtf_psw.setBackground(new Color(180, 210, 240));
+        jtf_psw.setEditable(false);
+        panel.add(jtf_psw);
+    }
+    
     //ETIQUETAS
      private void colocaEtiquetas() {
+        //Etiqueta de apellidos  
+        jbl_apellidos = new JLabel();
+        jbl_apellidos.setBounds(50, 20, 110, 15);
+        jbl_apellidos.setText("Apellidos");
+        jbl_apellidos.setForeground(Color.WHITE);
+        jbl_apellidos.setFont(new Font("arial", 1, 18));
+        panel.add(jbl_apellidos);
+
+        //Etiqueta de nombre
+        jbl_nombre = new JLabel();
+        jbl_nombre.setBounds(50, 150, 110, 15);
+        jbl_nombre.setText("Nombre(s)");
+        jbl_nombre.setForeground(Color.WHITE);
+        jbl_nombre.setFont(new Font("arial", 1, 18));
+        panel.add(jbl_nombre);
+        
+        //Etiqueta de email
+        jbl_email = new JLabel();
+        jbl_email.setBounds(50, 270, 110, 15);
+        jbl_email.setText("email");
+        jbl_email.setForeground(Color.WHITE);
+        jbl_email.setFont(new Font("arial", 1, 18));
+        panel.add(jbl_email);
+        
+        //Etiqueta de usuario
         usr = new JLabel();
-        usr.setBounds(100, 50, 110, 15);
+        usr.setBounds(300, 20, 110, 15);
         usr.setText("Usuario");
         usr.setForeground(Color.WHITE);
         usr.setFont(new Font("arial", 1, 18));
         panel.add(usr);
-
+        
+        //Etiqueta de psw
         psw = new JLabel();
-        psw.setBounds(100, 150, 110, 15);
+        psw.setBounds(300, 150, 110, 15);
         psw.setText("Contraseña");
         psw.setForeground(Color.WHITE);
         psw.setFont(new Font("arial", 1, 18));
         panel.add(psw);
     }
+     
+    //BOTONES
+    private void colocaBotones(){
+        //Boton "regresar"
+        btn_regresar = new JButton("Regresar");
+        btn_regresar.setBounds(345,450, 180, 40);
+        btn_regresar.setFont(new Font("arial", 1, 20));
+        btn_regresar.setBackground(new Color(185, 170, 220));
+        panel.add(btn_regresar);
+       // btn_regresar.addActionListener(this);
+       
+       //Boton "cerrar sesion"
+        btn_cerrar_sesion = new JButton("Cerrar Sesion");
+        btn_cerrar_sesion.setBounds(550,450, 180, 40);
+        btn_cerrar_sesion.setFont(new Font("arial", 1, 20));
+        btn_cerrar_sesion.setBackground(new Color(185, 170, 220));
+        panel.add(btn_cerrar_sesion);
+       // btn_cerrar_sesion.addActionListener(this);
+       
+       //Boton actualizar informacion
+        btn_actualiza_info = new JButton("Actualizar Informacion");
+        btn_actualiza_info.setBounds(300,250, 230, 40);
+        btn_actualiza_info.setFont(new Font("arial", 1, 18));
+        btn_actualiza_info.setBackground(new Color(185, 170, 220));
+        panel.add(btn_actualiza_info);
+        btn_actualiza_info.addActionListener(this);
+       
+       //Boton guardar cambios 
+        btn_save = new JButton("Guardar cambios");
+        btn_save.setBounds(320,300, 200, 40);
+        btn_save.setFont(new Font("arial", 1, 18));
+        btn_save.setBackground(new Color(185, 170, 220));
+        panel.add(btn_save);
+        btn_save.addActionListener(this);
+    }
+    
     //PANEL
     private void colocaPanel() {
         panel = new JPanel();
@@ -75,16 +189,33 @@ public class vMiCuenta extends JFrame implements ActionListener{
         panel.add(jbl_fondo);
     }
     
-    
-    
-    
-    
     //METODO DE EVENTO
     @Override
     public void actionPerformed(ActionEvent e) {
+    //evento del boton actualizar info
+        if(e.getSource() == btn_actualiza_info){
+            int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea actualizar sus datos?", "Actualizar Datos", 
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(respuesta == 0){
+                jtf_apellidos.setEditable(true);
+                jtf_nombres.setEditable(true);
+                jtf_email.setEditable(true);        
+                jtf_usr.setEditable(true);
+                jtf_psw.setEditable(true);     
+            }
+        }
         
-    }
-    
-    
-    
-}
+    //Eveneto para el boton guardar cambios 
+        if(e.getSource() == btn_save){
+            int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea guardar cambios?", "Guardar cambios", 
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(respuesta == 0){
+                jtf_apellidos.setEditable(false);
+                jtf_nombres.setEditable(false);
+                jtf_email.setEditable(false);        
+                jtf_usr.setEditable(false);
+                jtf_psw.setEditable(false);     
+            }
+        }
+    }//FIN DEL METODO DE LOS EVENTOS  
+}//FIN DE LA CLASE
