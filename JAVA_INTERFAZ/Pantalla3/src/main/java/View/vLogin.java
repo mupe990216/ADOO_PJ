@@ -22,7 +22,7 @@ public class vLogin extends JFrame implements ActionListener {
 
     public JPanel panel;
     public JTextField jtf_usuario, jtf_contrasenia;
-    public JButton btn_Ingresa;
+    public JButton btn_Ingresa,btn_registrarse;
     public JLabel fondo, usr, psw;
     public JPasswordField contra;
 
@@ -91,12 +91,21 @@ public class vLogin extends JFrame implements ActionListener {
     }
 
     private void colocaBoton() {
+        //Boton de ingresar al sistema 
         btn_Ingresa = new JButton("Ingresa");
-        btn_Ingresa.setBounds(120, 300, 160, 50);
+        btn_Ingresa.setBounds(120, 290, 160, 50);
         btn_Ingresa.setFont(new Font("arial", 1, 22));
         btn_Ingresa.setBackground(new Color(185, 170, 220));
         panel.add(btn_Ingresa);
         btn_Ingresa.addActionListener(this);
+        
+        //boton de registrarse
+        btn_registrarse = new JButton("Registrarse");
+        btn_registrarse.setBounds(120, 360, 160, 50);
+        btn_registrarse.setFont(new Font("arial", 1, 22));
+        btn_registrarse.setBackground(new Color(185, 170, 220));
+        panel.add(btn_registrarse);
+        btn_registrarse.addActionListener(this);
     }
 
     private void colocaFondo() {
@@ -110,6 +119,7 @@ public class vLogin extends JFrame implements ActionListener {
     //EVENTOS
     @Override
     public void actionPerformed(ActionEvent e) {
+        //Evento para el boton de ingresar al sistema
         if (e.getSource() == btn_Ingresa) {
             String usuario = jtf_usuario.getText();
             //String contras = jtf_contrasenia.getText();
@@ -140,6 +150,13 @@ public class vLogin extends JFrame implements ActionListener {
             } catch (SQLException ex) {
                 System.out.println("Error al iniciar Sesion: " + ex.getMessage());
             }
+        }
+        
+        //Evento para el boton Registrarse
+        if(e.getSource() == btn_registrarse){
+            vRegistrarse v2 = new vRegistrarse();
+            v2.setVisible(true);
+            this.dispose();
         }
     }
 

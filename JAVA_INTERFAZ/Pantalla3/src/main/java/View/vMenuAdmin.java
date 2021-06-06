@@ -130,7 +130,7 @@ public class vMenuAdmin extends JFrame implements ActionListener { //implements 
         //Etiquta de gestion de administradores
         jbl_admin = new JLabel();
         jbl_admin.setText("Gestionar Administradores");
-        jbl_admin.setFont(new Font("arial",1,14));
+        jbl_admin.setFont(new Font("arial",1,16));
         jbl_admin.setForeground(Color.WHITE);
         jbl_admin.setBounds(90, 200, 210, 30);
         panel.add(jbl_admin);
@@ -138,7 +138,7 @@ public class vMenuAdmin extends JFrame implements ActionListener { //implements 
         //Etiquta de gestion de clientes
         jbl_clie = new JLabel();
         jbl_clie.setText("Gestionar Clientes");
-        jbl_clie.setFont(new Font("arial",1,14));
+        jbl_clie.setFont(new Font("arial",1,16));
         jbl_clie.setForeground(Color.WHITE);
         jbl_clie.setBounds(415, 200, 210, 30);
         panel.add(jbl_clie);
@@ -146,7 +146,7 @@ public class vMenuAdmin extends JFrame implements ActionListener { //implements 
         //Etiqueta de gestion de publicaciones
         jbl_publ = new JLabel();
         jbl_publ.setText("Gestionar Publicaciones");
-        jbl_publ.setFont(new Font("arial",1,14));
+        jbl_publ.setFont(new Font("arial",1,16));
         jbl_publ.setForeground(Color.WHITE);
         jbl_publ.setBounds(100, 380, 210, 30);
         panel.add(jbl_publ);
@@ -154,7 +154,7 @@ public class vMenuAdmin extends JFrame implements ActionListener { //implements 
         //Etiqueta de gestion de Foros
         jbl_foro = new JLabel();
         jbl_foro.setText("Gestionar Foros");
-        jbl_foro.setFont(new Font("arial",1,14));
+        jbl_foro.setFont(new Font("arial",1,16));
         jbl_foro.setForeground(Color.WHITE);
         jbl_foro.setBounds(420, 380, 210, 30);
         panel.add(jbl_foro);
@@ -189,7 +189,24 @@ public class vMenuAdmin extends JFrame implements ActionListener { //implements 
             }
         }
         
-        //evento para el boton de Mi cuenta
+        //Evento para el boton de gest Admin
+        if(e.getSource() == btn_gestAdmin){
+            vGestAdmin GA = new vGestAdmin();
+            GA.setVisible(true);
+            this.dispose();
+        }
+        
+        //Evento para el boton gest Clien
+        if(e.getSource() == btn_gestClien){
+            vGestcliente GC = new vGestcliente();
+            GC.setVisible(true);
+            this.dispose();
+        }
+        //Evento para el boton Gest Public
+        
+        //Evento para el boton gest Foro
+        
+        //Evento para el boton de Mi cuenta
             if(e.getSource() == btn_mi_cuenta){
             vMiCuenta cuenta = new vMiCuenta();
             cuenta.setVisible(true);

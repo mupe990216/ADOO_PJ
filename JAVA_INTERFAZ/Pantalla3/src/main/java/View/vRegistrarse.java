@@ -1,8 +1,7 @@
 
 package View;
 
-//VENTANA MI CUENTA 
-
+//Bibliotecas
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -17,22 +16,22 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class vMiCuenta extends JFrame implements ActionListener{
-    //ATRIBUTOS
+//Ventana para el registro de un nuevo usuario tipo cliente 
+public class vRegistrarse extends JFrame implements ActionListener{
+    //ATRIBUTOS 
     public JPanel panel;
-    public JLabel jbl_fondo;
-    public JLabel jbl_apellidos, jbl_nombre,jbl_email,usr,psw;
-    public JButton btn_cerrar_sesion;
+    public JLabel jbl_fondo, jbl_dialogo;
+    public JLabel jbl_apellidos, jbl_nombre,jbl_email,usr,psw,jbl_im1,jbl_im2;
+    public JButton btn_finalizar;
     public JButton btn_regresar;
-    public JButton btn_actualiza_info, btn_save;
     public JTextField jtf_apellidos;
     public JTextField jtf_nombres;
     public JTextField jtf_email;
     public JTextField jtf_usr;
     public JPasswordField jtf_psw;
+    //METODOS
     
-    //CONTRUCTOR DE VENTANA
-    public vMiCuenta(){
+    public vRegistrarse(){
         setSize(800, 550);
         setTitle("Mi Cuenta");
         setLocationRelativeTo(null);
@@ -41,12 +40,11 @@ public class vMiCuenta extends JFrame implements ActionListener{
         setDefaultCloseOperation(EXIT_ON_CLOSE); 
     }
     
-    //METODO DE LOS COMPONENTES
     public void iniciaComponentes(){
-        //AQUI LLAMAMOS TODOS LOS METODOS DE CADA COMPONENTE DE LA VENTANA
         colocaPanel();
         colocaBotones();
         colocaCajasTexto();
+        colocaDialogo();
         colocaEtiquetas();
         colocaFondo();
     }
@@ -58,7 +56,7 @@ public class vMiCuenta extends JFrame implements ActionListener{
         jtf_apellidos.setFont(new Font("arial", 1, 18));
         //jtf_apellidos.setText("Ramirez Galindo");
         jtf_apellidos.setBackground(new Color(180, 210, 240));
-        jtf_apellidos.setEditable(false);
+        jtf_apellidos.setEditable(true);
         panel.add(jtf_apellidos);
         
         //Caja de nombres
@@ -66,7 +64,7 @@ public class vMiCuenta extends JFrame implements ActionListener{
         jtf_nombres.setBounds(50,170,200,40);
         jtf_nombres.setFont(new Font("arial", 1, 18));
         jtf_nombres.setBackground(new Color(180, 210, 240));
-        jtf_nombres.setEditable(false);
+        jtf_nombres.setEditable(true);
         panel.add(jtf_nombres);
         
         //Caja de email
@@ -74,7 +72,7 @@ public class vMiCuenta extends JFrame implements ActionListener{
         jtf_email.setBounds(50,290,200,40);
         jtf_email.setFont(new Font("arial", 1, 18));
         jtf_email.setBackground(new Color(180, 210, 240));
-        jtf_email.setEditable(false);
+        jtf_email.setEditable(true);
         panel.add(jtf_email);
         
         //Caja de usr
@@ -82,7 +80,7 @@ public class vMiCuenta extends JFrame implements ActionListener{
         jtf_usr.setBounds(300,50,200,40);
         jtf_usr.setFont(new Font("arial", 1, 18));
         jtf_usr.setBackground(new Color(180, 210, 240));
-        jtf_usr.setEditable(false);
+        jtf_usr.setEditable(true);
         panel.add(jtf_usr);
         
         //Caja psw
@@ -90,10 +88,18 @@ public class vMiCuenta extends JFrame implements ActionListener{
         jtf_psw.setBounds(300,170,200,40);
         jtf_psw.setFont(new Font("arial", 1, 18));
         jtf_psw.setBackground(new Color(180, 210, 240));
-        jtf_psw.setEditable(false);
+        jtf_psw.setEditable(true);
         panel.add(jtf_psw);
     }
     
+    private void colocaDialogo(){
+        jbl_dialogo = new JLabel();
+        jbl_dialogo.setBounds(408,225,200,100);
+        jbl_dialogo.setText("¿Quién es el nuevo?");
+        jbl_dialogo.setForeground(Color.BLACK);
+        jbl_dialogo.setFont(new Font("arial",1,18));
+        panel.add(jbl_dialogo);
+    }
     //ETIQUETAS
      private void colocaEtiquetas() {
         //Etiqueta de apellidos  
@@ -135,6 +141,22 @@ public class vMiCuenta extends JFrame implements ActionListener{
         psw.setForeground(Color.WHITE);
         psw.setFont(new Font("arial", 1, 18));
         panel.add(psw);
+        
+        //Etiqueta del perrito
+        jbl_im1 = new JLabel();
+        ImageIcon meme = new ImageIcon("./img/Administrador/perrito2.png");
+        jbl_im1.setBounds(580,300,200,150);
+        jbl_im1.setIcon(new ImageIcon(meme.getImage().getScaledInstance(jbl_im1.getWidth(),
+                jbl_im1.getHeight(),Image.SCALE_SMOOTH )));
+        panel.add(jbl_im1);
+        
+        //Etiqueta de viñeta
+        jbl_im2 = new JLabel();
+        ImageIcon meme2 = new ImageIcon("./img/Administrador/viñeta3.png");
+        jbl_im2.setBounds(400,230,200,100);
+        jbl_im2.setIcon(new ImageIcon(meme2.getImage().getScaledInstance(jbl_im2.getWidth(),
+                jbl_im2.getHeight(),Image.SCALE_SMOOTH )));
+        panel.add(jbl_im2);
     }
      
     //BOTONES
@@ -145,31 +167,16 @@ public class vMiCuenta extends JFrame implements ActionListener{
         btn_regresar.setFont(new Font("arial", 1, 20));
         btn_regresar.setBackground(new Color(185, 170, 220));
         panel.add(btn_regresar);
-       // btn_regresar.addActionListener(this);
+        btn_regresar.addActionListener(this);
        
        //Boton "cerrar sesion"
-        btn_cerrar_sesion = new JButton("Cerrar Sesion");
-        btn_cerrar_sesion.setBounds(550,450, 180, 40);
-        btn_cerrar_sesion.setFont(new Font("arial", 1, 20));
-        btn_cerrar_sesion.setBackground(new Color(185, 170, 220));
-        panel.add(btn_cerrar_sesion);
-        btn_cerrar_sesion.addActionListener(this);
+        btn_finalizar = new JButton("Finalizar");
+        btn_finalizar.setBounds(550,450, 180, 40);
+        btn_finalizar.setFont(new Font("arial", 1, 20));
+        btn_finalizar.setBackground(new Color(185, 170, 220));
+        panel.add(btn_finalizar);
+        btn_finalizar.addActionListener(this);
        
-       //Boton actualizar informacion
-        btn_actualiza_info = new JButton("Actualizar Informacion");
-        btn_actualiza_info.setBounds(300,250, 230, 40);
-        btn_actualiza_info.setFont(new Font("arial", 1, 18));
-        btn_actualiza_info.setBackground(new Color(185, 170, 220));
-        panel.add(btn_actualiza_info);
-        btn_actualiza_info.addActionListener(this);
-       
-       //Boton guardar cambios 
-        btn_save = new JButton("Guardar cambios");
-        btn_save.setBounds(320,300, 200, 40);
-        btn_save.setFont(new Font("arial", 1, 18));
-        btn_save.setBackground(new Color(185, 170, 220));
-        panel.add(btn_save);
-        btn_save.addActionListener(this);
     }
     
     //PANEL
@@ -188,52 +195,32 @@ public class vMiCuenta extends JFrame implements ActionListener{
         jbl_fondo.setIcon(new ImageIcon(logo_icono.getImage().getScaledInstance(jbl_fondo.getWidth(), jbl_fondo.getHeight(), Image.SCALE_SMOOTH)));
         panel.add(jbl_fondo);
     }
-    
-    //METODO DE EVENTO
+    //EVENTOS 
     @Override
     public void actionPerformed(ActionEvent e) {
-    //evento del boton actualizar info
-        if(e.getSource() == btn_actualiza_info){
-            int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea actualizar sus datos?", "Actualizar Datos", 
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if(respuesta == 0){
-                jtf_apellidos.setEditable(true);
-                jtf_nombres.setEditable(true);
-                jtf_email.setEditable(true);        
-                jtf_usr.setEditable(true);
-                jtf_psw.setEditable(true);     
-            }
-        }
-        
-    //Evento para el boton guardar cambios 
-        if(e.getSource() == btn_save){
-            int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea guardar cambios?", "Guardar cambios", 
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if(respuesta == 0){
-                jtf_apellidos.setEditable(false);
-                jtf_nombres.setEditable(false);
-                jtf_email.setEditable(false);        
-                jtf_usr.setEditable(false);
-                jtf_psw.setEditable(false);     
-            }
-        }
-    //Evento para el boton de cerrar sesion
-        if(e.getSource() == btn_cerrar_sesion){
-            int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea salir del sistema?", "Confirmar salida",
+        //Evento para el boton regresar
+        if(e.getSource() == btn_regresar){
+            int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea salir del sistema?\nNo se guardarán los cambios", "Confirmar salida",
             JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (respuesta == 0) {
-                JOptionPane.showMessageDialog(null, "Hasta Pronto :)");                
+                //JOptionPane.showMessageDialog(null, "Hasta Pronto :)");                
                 vLogin va_de_nuez = new vLogin();
                 va_de_nuez.setVisible(true);
                 this.dispose();
             }
             if (respuesta == 1) {
-                JOptionPane.showMessageDialog(null, "Sigueme Usando UwU");
+                //JOptionPane.showMessageDialog(null, "Sigueme Usando UwU");
             }
         }
-    //Evento para el boton regresar
-    if(e.getSource() == btn_regresar){
-        
+        //Evento para el boton finalizar
+        if(e.getSource() == btn_finalizar){
+            //ESPACIO PARA HACER LA CONEXION A LA BASE DE DATOS 
+            
+            //CAMBIO DE VENTANA 
+            vLogin va_de_nuez = new vLogin();
+            va_de_nuez.setVisible(true);
+            this.dispose();
+        }
     }
-    }//FIN DEL METODO DE LOS EVENTOS  
-}//FIN DE LA CLASE
+    
+}
