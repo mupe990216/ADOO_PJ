@@ -28,6 +28,9 @@ public class cDatos {
         Salida: Regresa un objeto del tipo Connection, es decir,
             me regresa todo lo necesario para saber como conectarme con 
             la base de datos del tipo MySQL
+        Execpciones:
+            Al intentar ejecutar este metodo puede que haya errores "execpciones" del tipo SQLException
+            dicha excepcion será tratada en el try catch cuando se realice la conexion 
      */
     public static Connection conecta() throws SQLException {
         return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);

@@ -21,10 +21,10 @@ public class vRegistrarse extends JFrame implements ActionListener{
     //ATRIBUTOS 
     public JPanel panel;
     public JLabel jbl_fondo, jbl_dialogo;
-    public JLabel jbl_apellidos, jbl_nombre,jbl_email,usr,psw,jbl_im1,jbl_im2;
+    public JLabel jbl_apellidoP,jbl_apellidoM, jbl_nombre,jbl_email,usr,psw,jbl_im1,jbl_im2;
     public JButton btn_finalizar;
     public JButton btn_regresar;
-    public JTextField jtf_apellidos;
+    public JTextField jtf_apellidoP,jtf_apellidoM;
     public JTextField jtf_nombres;
     public JTextField jtf_email;
     public JTextField jtf_usr;
@@ -33,7 +33,7 @@ public class vRegistrarse extends JFrame implements ActionListener{
     
     public vRegistrarse(){
         setSize(800, 550);
-        setTitle("Mi Cuenta");
+        setTitle("Registro");
         setLocationRelativeTo(null);
         setResizable(false);        
         iniciaComponentes();
@@ -50,29 +50,37 @@ public class vRegistrarse extends JFrame implements ActionListener{
     }
     //Cajas de Texto
     private void colocaCajasTexto(){
-        //Caja de apellidos
-        jtf_apellidos = new JTextField();
-        jtf_apellidos.setBounds(50,50,200,40);
-        jtf_apellidos.setFont(new Font("arial", 1, 18));
-        //jtf_apellidos.setText("Ramirez Galindo");
-        jtf_apellidos.setBackground(new Color(180, 210, 240));
-        jtf_apellidos.setEditable(true);
-        panel.add(jtf_apellidos);
+       //Caja de apellido Paterno
+        jtf_apellidoP = new JTextField();
+        jtf_apellidoP.setBounds(50,50,200,40);
+        jtf_apellidoP.setFont(new Font("arial", 1, 18));
+        //jtf_apellidoP.setText("Ramirez Galindo");
+        jtf_apellidoP.setBackground(new Color(180, 210, 240));
+        jtf_apellidoP.setEditable(false);
+        panel.add(jtf_apellidoP);
         
-        //Caja de nombres
+        //Caja de apellido Materno
+        jtf_apellidoM = new JTextField();
+        jtf_apellidoM.setBounds(50,150,200,40);
+        jtf_apellidoM.setFont(new Font("arial", 1, 18));
+        jtf_apellidoM.setBackground(new Color(180, 210, 240));
+        jtf_apellidoM.setEditable(false);
+        panel.add(jtf_apellidoM);
+        
+        //Caja de Nombre
         jtf_nombres = new JTextField();
-        jtf_nombres.setBounds(50,170,200,40);
+        jtf_nombres.setBounds(50,250,200,40);
         jtf_nombres.setFont(new Font("arial", 1, 18));
         jtf_nombres.setBackground(new Color(180, 210, 240));
-        jtf_nombres.setEditable(true);
+        jtf_nombres.setEditable(false);
         panel.add(jtf_nombres);
         
         //Caja de email
         jtf_email = new JTextField();
-        jtf_email.setBounds(50,290,200,40);
+        jtf_email.setBounds(50,350,200,40);
         jtf_email.setFont(new Font("arial", 1, 18));
         jtf_email.setBackground(new Color(180, 210, 240));
-        jtf_email.setEditable(true);
+        jtf_email.setEditable(false);
         panel.add(jtf_email);
         
         //Caja de usr
@@ -91,7 +99,7 @@ public class vRegistrarse extends JFrame implements ActionListener{
         jtf_psw.setEditable(true);
         panel.add(jtf_psw);
     }
-    
+    //ETIQUETAS
     private void colocaDialogo(){
         jbl_dialogo = new JLabel();
         jbl_dialogo.setBounds(408,225,200,100);
@@ -100,19 +108,27 @@ public class vRegistrarse extends JFrame implements ActionListener{
         jbl_dialogo.setFont(new Font("arial",1,18));
         panel.add(jbl_dialogo);
     }
-    //ETIQUETAS
-     private void colocaEtiquetas() {
-        //Etiqueta de apellidos  
-        jbl_apellidos = new JLabel();
-        jbl_apellidos.setBounds(50, 30, 110, 15);
-        jbl_apellidos.setText("Apellidos");
-        jbl_apellidos.setForeground(Color.WHITE);
-        jbl_apellidos.setFont(new Font("arial", 1, 18));
-        panel.add(jbl_apellidos);
+    
+    private void colocaEtiquetas() {
+        //Etiqueta de apellido Paterno  
+        jbl_apellidoP = new JLabel();
+        jbl_apellidoP.setBounds(50, 30, 160, 15);
+        jbl_apellidoP.setText("Apellido Paterno");
+        jbl_apellidoP.setForeground(Color.WHITE);
+        jbl_apellidoP.setFont(new Font("arial", 1, 18));
+        panel.add(jbl_apellidoP);
 
+        //Etiqueta de apellido Materno
+        jbl_apellidoM = new JLabel();
+        jbl_apellidoM.setBounds(50, 130, 160, 15);
+        jbl_apellidoM.setText("Apellido Materno");
+        jbl_apellidoM.setForeground(Color.WHITE);
+        jbl_apellidoM.setFont(new Font("arial", 1, 18));
+        panel.add(jbl_apellidoM);
+        
         //Etiqueta de nombre
         jbl_nombre = new JLabel();
-        jbl_nombre.setBounds(50, 150, 110, 15);
+        jbl_nombre.setBounds(50, 230, 110, 15);
         jbl_nombre.setText("Nombre(s)");
         jbl_nombre.setForeground(Color.WHITE);
         jbl_nombre.setFont(new Font("arial", 1, 18));
@@ -120,7 +136,7 @@ public class vRegistrarse extends JFrame implements ActionListener{
         
         //Etiqueta de email
         jbl_email = new JLabel();
-        jbl_email.setBounds(50, 270, 110, 15);
+        jbl_email.setBounds(50, 330, 110, 15);
         jbl_email.setText("email");
         jbl_email.setForeground(Color.WHITE);
         jbl_email.setFont(new Font("arial", 1, 18));

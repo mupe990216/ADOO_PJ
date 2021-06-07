@@ -1,8 +1,6 @@
 
 package View;
-
-//VENTANA MI CUENTA 
-
+//Bibliotecas
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -12,44 +10,43 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class vMiCuenta extends JFrame implements ActionListener{
+//Ventana para nuevo cliente
+public class vRegCliente extends JFrame implements ActionListener {
     //ATRIBUTOS
     public JPanel panel;
-    public JLabel jbl_fondo;
-    public JLabel jbl_apellidoP,jbl_apellidoM, jbl_nombre,jbl_email,usr,psw;
+    public JLabel jbl_fondo,jbl_im1;
+    public JLabel jbl_apellidoP,jbl_apellidoM,jbl_nombre,jbl_email,usr,psw;
     public JButton btn_cerrar_sesion;
     public JButton btn_regresar;
-    public JButton btn_actualiza_info, btn_save;
+    public JButton btn_actualiza_info, btn_finalizar;
     public JTextField jtf_apellidoP,jtf_apellidoM;
     public JTextField jtf_nombres;
     public JTextField jtf_email;
     public JTextField jtf_usr;
     public JPasswordField jtf_psw;
     
-    //CONTRUCTOR DE VENTANA
-    public vMiCuenta(){
+    //METODOS
+    public vRegCliente(){
         setSize(800, 550);
-        setTitle("Mi Cuenta");
+        setTitle("Nuevo Cliente");
         setLocationRelativeTo(null);
         setResizable(false);        
         iniciaComponentes();
         setDefaultCloseOperation(EXIT_ON_CLOSE); 
     }
     
-    //METODO DE LOS COMPONENTES
-    public void iniciaComponentes(){
-        //AQUI LLAMAMOS TODOS LOS METODOS DE CADA COMPONENTE DE LA VENTANA
+     public void iniciaComponentes(){
         colocaPanel();
-        colocaBotones();
         colocaCajasTexto();
         colocaEtiquetas();
+        colocaBotones();
         colocaFondo();
     }
+    
     //Cajas de Texto
     private void colocaCajasTexto(){
         //Caja de apellido Paterno
@@ -90,20 +87,20 @@ public class vMiCuenta extends JFrame implements ActionListener{
         jtf_usr.setBounds(300,50,200,40);
         jtf_usr.setFont(new Font("arial", 1, 18));
         jtf_usr.setBackground(new Color(180, 210, 240));
-        jtf_usr.setEditable(false);
+        jtf_usr.setEditable(true);
         panel.add(jtf_usr);
         
         //Caja psw
         jtf_psw = new JPasswordField();
-        jtf_psw.setBounds(300,170,200,40);
+        jtf_psw.setBounds(300,150,200,40);
         jtf_psw.setFont(new Font("arial", 1, 18));
         jtf_psw.setBackground(new Color(180, 210, 240));
-        jtf_psw.setEditable(false);
+        jtf_psw.setEditable(true);
         panel.add(jtf_psw);
     }
     
     //ETIQUETAS
-     private void colocaEtiquetas() {
+    private void colocaEtiquetas() {
         //Etiqueta de apellido Paterno  
         jbl_apellidoP = new JLabel();
         jbl_apellidoP.setBounds(50, 30, 160, 15);
@@ -146,11 +143,19 @@ public class vMiCuenta extends JFrame implements ActionListener{
         
         //Etiqueta de psw
         psw = new JLabel();
-        psw.setBounds(300, 150, 110, 15);
+        psw.setBounds(300, 130, 110, 15);
         psw.setText("Contraseña");
         psw.setForeground(Color.WHITE);
         psw.setFont(new Font("arial", 1, 18));
         panel.add(psw);
+        
+        //Etiqueta de imagen 
+        jbl_im1 = new JLabel();
+        ImageIcon meme = new ImageIcon("./img/p3.png");
+        jbl_im1.setBounds(380,240,270,200);
+        jbl_im1.setIcon(new ImageIcon(meme.getImage().getScaledInstance(jbl_im1.getWidth(),
+                jbl_im1.getHeight(),Image.SCALE_SMOOTH )));
+        panel.add(jbl_im1);
     }
      
     //BOTONES
@@ -161,7 +166,7 @@ public class vMiCuenta extends JFrame implements ActionListener{
         btn_regresar.setFont(new Font("arial", 1, 20));
         btn_regresar.setBackground(new Color(185, 170, 220));
         panel.add(btn_regresar);
-       // btn_regresar.addActionListener(this);
+        btn_regresar.addActionListener(this);
        
        //Boton "cerrar sesion"
         btn_cerrar_sesion = new JButton("Cerrar Sesion");
@@ -171,21 +176,13 @@ public class vMiCuenta extends JFrame implements ActionListener{
         panel.add(btn_cerrar_sesion);
         btn_cerrar_sesion.addActionListener(this);
        
-       //Boton actualizar informacion
-        btn_actualiza_info = new JButton("Actualizar Informacion");
-        btn_actualiza_info.setBounds(300,250, 230, 40);
-        btn_actualiza_info.setFont(new Font("arial", 1, 18));
-        btn_actualiza_info.setBackground(new Color(185, 170, 220));
-        panel.add(btn_actualiza_info);
-        btn_actualiza_info.addActionListener(this);
-       
-       //Boton guardar cambios 
-        btn_save = new JButton("Guardar cambios");
-        btn_save.setBounds(320,300, 200, 40);
-        btn_save.setFont(new Font("arial", 1, 18));
-        btn_save.setBackground(new Color(185, 170, 220));
-        panel.add(btn_save);
-        btn_save.addActionListener(this);
+       //Boton finalizar 
+        btn_finalizar = new JButton("Finalizar");
+        btn_finalizar.setBounds(300,210, 200, 40);
+        btn_finalizar.setFont(new Font("arial", 1, 18));
+        btn_finalizar.setBackground(new Color(185, 170, 220));
+        panel.add(btn_finalizar);
+        btn_finalizar.addActionListener(this);
     }
     
     //PANEL
@@ -197,7 +194,7 @@ public class vMiCuenta extends JFrame implements ActionListener{
     }
     
     //FONDO
-     private void colocaFondo() {
+    private void colocaFondo() {
         ImageIcon logo_icono = new ImageIcon("./img/Fondo.png");
         jbl_fondo = new JLabel();
         jbl_fondo.setBounds(0, 0, this.getWidth(), this.getHeight());
@@ -205,51 +202,29 @@ public class vMiCuenta extends JFrame implements ActionListener{
         panel.add(jbl_fondo);
     }
     
-    //METODO DE EVENTO
+    //Verificar si los jtf estan vacios
+    private int jtfVacio(){
+         String ApellidoP,ApellidoM,Nombre,email,usr,psw;
+         ApellidoP = jtf_apellidoP.getText();
+         ApellidoM = jtf_apellidoM.getText();
+         Nombre = jtf_nombres.getText();
+         email = jtf_email.getText();
+         usr = jtf_usr.getText();
+         psw = "";
+         for(int i = 0;i < jtf_psw.getPassword().length;i++){
+             psw += jtf_psw.getPassword()[i];
+         }
+         if(ApellidoP.equals("") || ApellidoM.equals("") || Nombre.equals("") || email.equals("") || usr.equals("") || psw.equals("")){
+             return 1;
+         }
+         else{
+             return 0;
+         }
+     }
+    //EVENTOS
     @Override
     public void actionPerformed(ActionEvent e) {
-    //evento del boton actualizar info
-        if(e.getSource() == btn_actualiza_info){
-            int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea actualizar sus datos?", "Actualizar Datos", 
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if(respuesta == 0){
-                //jtf_apellidos.setEditable(true);
-                jtf_nombres.setEditable(true);
-                jtf_email.setEditable(true);        
-                jtf_usr.setEditable(true);
-                jtf_psw.setEditable(true);     
-            }
-        }
-        
-    //Evento para el boton guardar cambios 
-        if(e.getSource() == btn_save){
-            int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea guardar cambios?", "Guardar cambios", 
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if(respuesta == 0){
-               // jtf_apellidos.setEditable(false);
-                jtf_nombres.setEditable(false);
-                jtf_email.setEditable(false);        
-                jtf_usr.setEditable(false);
-                jtf_psw.setEditable(false);     
-            }
-        }
-    //Evento para el boton de cerrar sesion
-        if(e.getSource() == btn_cerrar_sesion){
-            int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea salir del sistema?", "Confirmar salida",
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (respuesta == 0) {
-                JOptionPane.showMessageDialog(null, "Hasta Pronto :)");                
-                vLogin va_de_nuez = new vLogin();
-                va_de_nuez.setVisible(true);
-                this.dispose();
-            }
-            if (respuesta == 1) {
-                JOptionPane.showMessageDialog(null, "Sigueme Usando UwU");
-            }
-        }
-    //Evento para el boton regresar
-    if(e.getSource() == btn_regresar){
         
     }
-    }//FIN DEL METODO DE LOS EVENTOS  
-}//FIN DE LA CLASE
+    
+}

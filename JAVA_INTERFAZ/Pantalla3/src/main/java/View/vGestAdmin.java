@@ -24,7 +24,7 @@ public class vGestAdmin extends JFrame implements ActionListener{
     //Metodos
     public vGestAdmin(){
         setSize(750, 400);
-        setTitle("Gestionar Administradores");
+        setTitle("Gestión de Administradores");
         setLocationRelativeTo(null);
         setResizable(false);
         iniciaComponentes();
@@ -117,7 +117,7 @@ public class vGestAdmin extends JFrame implements ActionListener{
     //EVENTOS 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //BOTON PARA CERRAR SESION
+        //EVENTO PARA CERRAR SESION
         if(e.getSource() == btn_cerrar_sesion){
             int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea salir del sistema?", "Confirmar salida",
             JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -131,14 +131,24 @@ public class vGestAdmin extends JFrame implements ActionListener{
                 JOptionPane.showMessageDialog(null, "Sigueme Usando UwU");
             }
         }
-        //BOTON PARA REGRESAR
+        //EVENTO PARA REGRESAR
         if(e.getSource() == btn_regresar){
             vMenuAdmin vMA = new vMenuAdmin();
             vMA.setVisible(true);
             this.dispose();
         }
         
+        //EVENTO PARA REGISTRAR NUEVO ADMINISTRADOR
+        if(e.getSource() == btn_agregarAdmin){
+            vRegAdmin v4 = new vRegAdmin();
+            v4.setVisible(true);
+            this.dispose();
+        }
         
+        //EVENTO PARA CONSULTAR ADMINISTRADORES
+        if(e.getSource() == btn_consultar){
+            
+        }
     }//FIN DEL METODO DE EVENTOS
     
 }

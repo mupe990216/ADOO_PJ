@@ -3,6 +3,7 @@ package View;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -35,6 +36,7 @@ public class vMenuAdmin extends JFrame implements ActionListener { //implements 
         setTitle("Menu Administrador");
         setLocationRelativeTo(null);
         setResizable(false);
+        //cambioIcono();
         iniciaComponentes();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -51,6 +53,12 @@ public class vMenuAdmin extends JFrame implements ActionListener { //implements 
         colocaEtiquetas();
         colocaFondo();
     }
+    //CAMBIO DE ICONO
+    private void cambioIcono(){
+        Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        Image miIcono = miPantalla.getImage("./img/LOBO.png");
+        setIconImage(miIcono);
+    } 
 
     //PANEL
     private void colocaPanel() {
@@ -203,9 +211,17 @@ public class vMenuAdmin extends JFrame implements ActionListener { //implements 
             this.dispose();
         }
         //Evento para el boton Gest Public
-        
+        if(e.getSource() == btn_gestPublic){
+            vGestPublic GP = new vGestPublic();
+            GP.setVisible(true);
+            this.dispose();
+        }
         //Evento para el boton gest Foro
-        
+        if(e.getSource() == btn_gestForo){
+            vGestForo GF = new vGestForo();
+            GF.setVisible(true);
+            this.dispose();
+        }
         //Evento para el boton de Mi cuenta
             if(e.getSource() == btn_mi_cuenta){
             vMiCuenta cuenta = new vMiCuenta();

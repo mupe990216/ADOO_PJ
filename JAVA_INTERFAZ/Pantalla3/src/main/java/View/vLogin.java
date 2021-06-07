@@ -4,6 +4,7 @@ import DB.cDatos;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -31,7 +32,8 @@ public class vLogin extends JFrame implements ActionListener {
         setSize(405, 600);
         setTitle("Inicio de Sesión");
         setLocationRelativeTo(null);
-        setResizable(false);        
+        setResizable(false);
+        //cambioIcono();
         iniciaComponentes();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -44,6 +46,12 @@ public class vLogin extends JFrame implements ActionListener {
         colocaBoton();
         colocaFondo();
     }
+    
+    private void cambioIcono(){
+        Toolkit miPantalla = Toolkit.getDefaultToolkit();
+        Image miIcono = miPantalla.getImage("./img/LOBO.png");
+        setIconImage(miIcono);
+    } 
 
     private void colocaPanel() {
         panel = new JPanel();
@@ -58,15 +66,9 @@ public class vLogin extends JFrame implements ActionListener {
         jtf_usuario.setFont(new Font("arial", 1, 22));
         jtf_usuario.setBackground(new Color(180, 210, 240));
         panel.add(jtf_usuario);
-
-        //jtf_contrasenia = new JTextField();
-        //jtf_contrasenia.setBounds(100, 175, 200, 50);
-        //jtf_contrasenia.setFont(new Font("arial", 1, 22));
-        //jtf_contrasenia.setBackground(new Color(180, 210, 240));
-        //panel.add(jtf_contrasenia);
     }
     
-     public void colocaPasswordField(){
+    public void colocaPasswordField(){
          contra = new JPasswordField();
          contra.setBounds(100,175,200,50);
          contra.setFont(new Font("arial", 1, 22));
@@ -127,13 +129,14 @@ public class vLogin extends JFrame implements ActionListener {
             for(int i = 0; i< contra.getPassword().length;i++ ){
                 contras += contra.getPassword()[i];
             }
-            cDatos datitos = new cDatos();
+            cDatos datitos = new cDatos(); //Creo un objeto de la clase para conectar a MySQL
             try {
                 Connection conn = datitos.conecta(); //Conecta Java con MySQL y regresa un objeto del tipo connection
+                //RESULSET = conjunto de resultados de una sentencia SQL
                 ResultSet rs = datitos.consulta("call sp_Login('" + usuario + "','" + contras + "');", conn); // Ejecuta sentencia SQL y regresa las coincidencias
-                while (rs.next()) {
-                    JOptionPane.showMessageDialog(null, rs.getString("Respuesta"));
-                    //JOptionPane.showMessageDialog(null, rs.getString("tipoUSR"));
+                while (rs.next()) { //next() => mientras haya algo que leer en de la consulta
+                    JOptionPane.showMessageDialog(null, rs.getString("Respuesta")); //Columna Respuesta
+                    //JOptionPane.showMessageDialog(null, rs.getString("tipoUSR")); //Columna tipo usr
                     if(rs.getString("tipoUSR").equalsIgnoreCase("Administrador")){
                         vMenuAdmin mAdmin = new vMenuAdmin();                  
                         mAdmin.setVisible(true);
@@ -147,7 +150,7 @@ public class vLogin extends JFrame implements ActionListener {
                 }
                 rs.close();
                 conn.close();
-            } catch (SQLException ex) {
+            } catch (SQLException ex) { //SQLException ex 
                 System.out.println("Error al iniciar Sesion: " + ex.getMessage());
             }
         }
@@ -159,5 +162,12 @@ public class vLogin extends JFrame implements ActionListener {
             this.dispose();
         }
     }
-
+    /*
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("./img/LOGO2.png"));
+        this.setIconImage(retValue);
+        return retValue;
+    }*/
 }
+

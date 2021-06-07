@@ -25,7 +25,7 @@ public class vGestcliente extends JFrame implements ActionListener{
     //METODOS
     public vGestcliente(){
         setSize(750, 400);
-        setTitle("Gestionar Clientes");
+        setTitle("Gestión de Clientes");
         setLocationRelativeTo(null);
         setResizable(false);
         iniciaComponentes();
@@ -112,12 +112,10 @@ public class vGestcliente extends JFrame implements ActionListener{
         panel.add(jbl_fondo);
     }
     
-    //Metodo 
-    
     //EVENTOS 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //BOTON PARA CERRAR SESION
+        //EVENTO PARA CERRAR SESION
         if(e.getSource() == btn_cerrar_sesion){
             int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea salir del sistema?", "Confirmar salida",
             JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -131,10 +129,17 @@ public class vGestcliente extends JFrame implements ActionListener{
                 JOptionPane.showMessageDialog(null, "Sigueme Usando UwU");
             }
         }
-        //BOTON PARA REGRESAR
+        //EVENTO PARA REGRESAR
         if(e.getSource() == btn_regresar){
             vMenuAdmin vMA = new vMenuAdmin();
             vMA.setVisible(true);
+            this.dispose();
+        }
+        
+        //EVENTO PARA NUEVO CLIENTE
+        if(e.getSource() == btn_nCliente){
+            vRegCliente RC = new vRegCliente();
+            RC.setVisible(true);
             this.dispose();
         }
     }
