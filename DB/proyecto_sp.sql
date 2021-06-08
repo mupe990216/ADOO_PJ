@@ -1,3 +1,4 @@
+##---------------------------------- LOGIN ----------------------------------
 drop procedure if exists sp_Login;
 delimiter **
 create procedure sp_Login(in usr varchar(64), in psw varchar(64))
@@ -36,6 +37,25 @@ call sp_Login('usr01','123');
 
 
 #select idTipoUsuario from Persona where Persona.Usuario = 'usr01';
+
+##---------------------------------- Visualizar Mi Cuenta ----------------------------------
+drop procedure if exists sp_VerMiCuenta;
+delimiter **
+create procedure sp_VerMiCuenta(in usur varchar(64), in pswd varchar(64))
+begin
+declare existe int;
+declare msj varchar(64);
+set existe = (select count(*) from credencial where credencial.Usuario = usur);
+	if existe = 0 then
+		set msj = 'No existe el usuario';
+        select msj as Respuesta;
+            else
+				select persona.ApePaterno as "Apellido Paterno", persona.ApeMaterno as "Apellido Materno", 
+                persona.Nombre as "Nombre(s)", persona.Email, persona.Usuario as "Nombre de usuario", credencial.contrasenia as "Contraseña"
+                from persona inner join credencial on persona.Usuario=credencial.Usuario and persona.Usuario=usur;
+	end if;			
+end **
+delimiter ;
 
 ##---------------------------------- Alta de Administrador ----------------------------------
 drop procedure if exists sp_AltaAdmin;
