@@ -20,13 +20,15 @@ public class vGestAdmin extends JFrame implements ActionListener{
     public JPanel panel;
     public JLabel jbl_fondo,jbl_nAdmin,jbl_cAdmin;
     public JButton btn_cerrar_sesion,btn_regresar,btn_agregarAdmin,btn_consultar,btn_eliminar;
+    public Usuario uvga;
     
     //Metodos
-    public vGestAdmin(){
+    public vGestAdmin(Usuario u){
         setSize(750, 400);
         setTitle("Gestión de Administradores");
         setLocationRelativeTo(null);
         setResizable(false);
+        uvga = u;
         iniciaComponentes();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -133,14 +135,14 @@ public class vGestAdmin extends JFrame implements ActionListener{
         }
         //EVENTO PARA REGRESAR
         if(e.getSource() == btn_regresar){
-            vMenuAdmin vMA = new vMenuAdmin();
+            vMenuAdmin vMA = new vMenuAdmin(uvga);
             vMA.setVisible(true);
             this.dispose();
         }
         
         //EVENTO PARA REGISTRAR NUEVO ADMINISTRADOR
         if(e.getSource() == btn_agregarAdmin){
-            vRegAdmin v4 = new vRegAdmin();
+            vRegAdmin v4 = new vRegAdmin(uvga);
             v4.setVisible(true);
             this.dispose();
         }

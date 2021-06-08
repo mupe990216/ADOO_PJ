@@ -13,13 +13,14 @@ import javax.swing.JFrame;
 public class vGestPublic extends JFrame implements ActionListener{
 
     //ATRIBUTOS
-    
+    public Usuario uvgp;
     //METODOS
-    public vGestPublic(){
+    public vGestPublic(Usuario u){
         setSize(950, 600);
         setTitle("Gestión de Publicaciones");
         setLocationRelativeTo(null);
         setResizable(false);
+        uvgp = u;
         iniciaComponentes();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }

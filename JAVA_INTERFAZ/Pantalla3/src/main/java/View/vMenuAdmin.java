@@ -31,12 +31,14 @@ public class vMenuAdmin extends JFrame implements ActionListener { //implements 
     public JLabel jbl_publ;
     public JLabel jbl_foro;
     
-    public vMenuAdmin() {
+    public Usuario uvma;
+    public vMenuAdmin(Usuario usr) {
         setSize(950, 600);
         setTitle("Menu Administrador");
         setLocationRelativeTo(null);
         setResizable(false);
         //cambioIcono();
+        uvma = usr;
         iniciaComponentes();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -199,32 +201,32 @@ public class vMenuAdmin extends JFrame implements ActionListener { //implements 
         
         //Evento para el boton de gest Admin
         if(e.getSource() == btn_gestAdmin){
-            vGestAdmin GA = new vGestAdmin();
+            vGestAdmin GA = new vGestAdmin(uvma);
             GA.setVisible(true);
             this.dispose();
         }
         
         //Evento para el boton gest Clien
         if(e.getSource() == btn_gestClien){
-            vGestcliente GC = new vGestcliente();
+            vGestcliente GC = new vGestcliente(uvma);
             GC.setVisible(true);
             this.dispose();
         }
         //Evento para el boton Gest Public
         if(e.getSource() == btn_gestPublic){
-            vGestPublic GP = new vGestPublic();
+            vGestPublic GP = new vGestPublic(uvma);
             GP.setVisible(true);
             this.dispose();
         }
         //Evento para el boton gest Foro
         if(e.getSource() == btn_gestForo){
-            vGestForo GF = new vGestForo();
+            vGestForo GF = new vGestForo(uvma);
             GF.setVisible(true);
             this.dispose();
         }
         //Evento para el boton de Mi cuenta
             if(e.getSource() == btn_mi_cuenta){
-            vMiCuenta cuenta = new vMiCuenta();
+            vMiCuenta cuenta = new vMiCuenta(uvma);
             cuenta.setVisible(true);
             this.dispose();
         }

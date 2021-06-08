@@ -20,14 +20,15 @@ public class vGestcliente extends JFrame implements ActionListener{
     public JPanel panel;
     public JLabel jbl_fondo,jbl_ncliente,jbl_cCliente;
     public JButton btn_cerrar_sesion,btn_regresar,btn_nCliente,btn_cCliente;
-    
+    public Usuario uvgc;
     
     //METODOS
-    public vGestcliente(){
+    public vGestcliente(Usuario u){
         setSize(750, 400);
         setTitle("Gestión de Clientes");
         setLocationRelativeTo(null);
         setResizable(false);
+        uvgc = u;
         iniciaComponentes();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -131,14 +132,14 @@ public class vGestcliente extends JFrame implements ActionListener{
         }
         //EVENTO PARA REGRESAR
         if(e.getSource() == btn_regresar){
-            vMenuAdmin vMA = new vMenuAdmin();
+            vMenuAdmin vMA = new vMenuAdmin(uvgc);
             vMA.setVisible(true);
             this.dispose();
         }
         
         //EVENTO PARA NUEVO CLIENTE
         if(e.getSource() == btn_nCliente){
-            vRegCliente RC = new vRegCliente();
+            vRegCliente RC = new vRegCliente(uvgc);
             RC.setVisible(true);
             this.dispose();
         }

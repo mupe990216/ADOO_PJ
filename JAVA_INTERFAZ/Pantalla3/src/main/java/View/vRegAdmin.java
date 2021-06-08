@@ -1,11 +1,15 @@
 
 package View;
 //Bibliotecas
+import DB.cDatos;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,21 +26,21 @@ public class vRegAdmin extends JFrame implements ActionListener{
     public JPanel panel;
     public JLabel jbl_fondo,jbl_im1;
     public JLabel jbl_apellidoP,jbl_apellidoM,jbl_nombre,jbl_email,usr,psw;
-    public JButton btn_cerrar_sesion;
-    public JButton btn_regresar;
+    public JButton btn_cerrar_sesion,btn_regresar;
     public JButton btn_actualiza_info, btn_finalizar;
     public JTextField jtf_apellidoP,jtf_apellidoM;
-    public JTextField jtf_nombres;
-    public JTextField jtf_email;
-    public JTextField jtf_usr;
+    public JTextField jtf_nombres,jtf_email,jtf_usr;
     public JPasswordField jtf_psw;
+    public Usuario uvra;
+    public String ApellidoP,ApellidoM,Nombre,email,Susr,Spsw;
     
     //METODOS
-    public vRegAdmin(){
+    public vRegAdmin(Usuario u){
         setSize(800, 550);
         setTitle("Nuevo Administrador");
         setLocationRelativeTo(null);
-        setResizable(false);        
+        setResizable(false);  
+        uvra = u;
         iniciaComponentes();
         setDefaultCloseOperation(EXIT_ON_CLOSE); 
     }
@@ -57,7 +61,7 @@ public class vRegAdmin extends JFrame implements ActionListener{
         jtf_apellidoP.setFont(new Font("arial", 1, 18));
         //jtf_apellidoP.setText("Ramirez Galindo");
         jtf_apellidoP.setBackground(new Color(180, 210, 240));
-        jtf_apellidoP.setEditable(false);
+        jtf_apellidoP.setEditable(true);
         panel.add(jtf_apellidoP);
         
         //Caja de apellido Materno
@@ -65,7 +69,7 @@ public class vRegAdmin extends JFrame implements ActionListener{
         jtf_apellidoM.setBounds(50,150,200,40);
         jtf_apellidoM.setFont(new Font("arial", 1, 18));
         jtf_apellidoM.setBackground(new Color(180, 210, 240));
-        jtf_apellidoM.setEditable(false);
+        jtf_apellidoM.setEditable(true);
         panel.add(jtf_apellidoM);
         
         //Caja de Nombre
@@ -73,7 +77,7 @@ public class vRegAdmin extends JFrame implements ActionListener{
         jtf_nombres.setBounds(50,250,200,40);
         jtf_nombres.setFont(new Font("arial", 1, 18));
         jtf_nombres.setBackground(new Color(180, 210, 240));
-        jtf_nombres.setEditable(false);
+        jtf_nombres.setEditable(true);
         panel.add(jtf_nombres);
         
         //Caja de email
@@ -81,7 +85,7 @@ public class vRegAdmin extends JFrame implements ActionListener{
         jtf_email.setBounds(50,350,200,40);
         jtf_email.setFont(new Font("arial", 1, 18));
         jtf_email.setBackground(new Color(180, 210, 240));
-        jtf_email.setEditable(false);
+        jtf_email.setEditable(true);
         panel.add(jtf_email);
         
         //Caja de usr
@@ -206,17 +210,17 @@ public class vRegAdmin extends JFrame implements ActionListener{
     
     //Verificar si los jtf estan vacios
     private int jtfVacio(){
-         String ApellidoP,ApellidoM,Nombre,email,usr,psw;
+         //String ApellidoP,ApellidoM,Nombre,email,usr,psw;
          ApellidoP = jtf_apellidoP.getText();
          ApellidoM = jtf_apellidoM.getText();
          Nombre = jtf_nombres.getText();
          email = jtf_email.getText();
-         usr = jtf_usr.getText();
-         psw = "";
+         Susr = jtf_usr.getText();
+         Spsw = "";
          for(int i = 0;i < jtf_psw.getPassword().length;i++){
-             psw += jtf_psw.getPassword()[i];
+             Spsw += jtf_psw.getPassword()[i];
          }
-         if(ApellidoP.equals("") || ApellidoM.equals("") || Nombre.equals("") || email.equals("") || usr.equals("") || psw.equals("")){
+         if(ApellidoP.equals("") || ApellidoM.equals("") || Nombre.equals("") || email.equals("") || Susr.equals("") || Spsw.equals("")){
              return 1;
          }
          else{
@@ -234,10 +238,29 @@ public class vRegAdmin extends JFrame implements ActionListener{
             if (respuesta == 0) {
                //Verificamos  
                 if(vacio == 0){
+                    //VERIFICAMOS LO QUE TOMAN LAS CAJA DE TEXTO
+                    //System.out.println(ApellidoP);
+                    //System.out.println(ApellidoM);
+                    //System.out.println(Nombre);
+                    //System.out.println(email);
+                    //System.out.println(Susr);
+                    //System.out.println(Spsw);
                     //Agregamos con el SP la informacion a la BD 
-                    
+                    cDatos datitos = new cDatos(); //Creo un objeto de la clase para conectar a MySQL
+                    try{
+                        Connection conn = datitos.conecta(); 
+                        ResultSet rs = datitos.consulta("call sp_AltaAdmin('"+Nombre+ "','"+ApellidoP+"','" +ApellidoM+"','"+email+"','"+Susr+"','"+Spsw+"');",
+                                conn); // Ejecuta sentencia SQL y regresa las coincidencias
+                        while(rs.next()){
+                            JOptionPane.showMessageDialog(null, rs.getString("Respuesta")); //Columna Respuesta
+                        }
+                        rs.close();
+                        conn.close();
+                    } catch(SQLException ex){
+                        System.out.println("Error al iniciar Sesion: " + ex.getMessage());
+                    }
                     //Una vez agregada regresamos a la ventana anterior
-                    vGestAdmin v1 = new vGestAdmin();
+                    vGestAdmin v1 = new vGestAdmin(uvra);
                     v1.setVisible(true);
                     this.dispose();
                }
@@ -252,7 +275,7 @@ public class vRegAdmin extends JFrame implements ActionListener{
             int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea salir del sistema?\nNo se guardarán los cambios", "Confirmar salida",
             JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (respuesta == 0) {           
-                vGestAdmin GA = new vGestAdmin();
+                vGestAdmin GA = new vGestAdmin(uvra);
                 GA.setVisible(true);
                 this.dispose();
             }

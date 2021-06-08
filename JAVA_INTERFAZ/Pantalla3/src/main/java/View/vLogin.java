@@ -26,6 +26,7 @@ public class vLogin extends JFrame implements ActionListener {
     public JButton btn_Ingresa,btn_registrarse;
     public JLabel fondo, usr, psw;
     public JPasswordField contra;
+    //public static String usuario,tipo_usr;
 
 
     public vLogin() {
@@ -78,8 +79,8 @@ public class vLogin extends JFrame implements ActionListener {
 
     private void colocaEtiquetas() {
         usr = new JLabel();
-        usr.setBounds(100, 50, 110, 15);
-        usr.setText("Usuario");
+        usr.setBounds(100, 50, 200, 15);
+        usr.setText("Nombre de usuario");
         usr.setForeground(Color.WHITE);
         usr.setFont(new Font("arial", 1, 18));
         panel.add(usr);
@@ -135,15 +136,28 @@ public class vLogin extends JFrame implements ActionListener {
                 //RESULSET = conjunto de resultados de una sentencia SQL
                 ResultSet rs = datitos.consulta("call sp_Login('" + usuario + "','" + contras + "');", conn); // Ejecuta sentencia SQL y regresa las coincidencias
                 while (rs.next()) { //next() => mientras haya algo que leer en de la consulta
-                    JOptionPane.showMessageDialog(null, rs.getString("Respuesta")); //Columna Respuesta
+                    //JOptionPane.showMessageDialog(null, rs.getString("Respuesta")); //Columna Respuesta
                     //JOptionPane.showMessageDialog(null, rs.getString("tipoUSR")); //Columna tipo usr
                     if(rs.getString("tipoUSR").equalsIgnoreCase("Administrador")){
-                        vMenuAdmin mAdmin = new vMenuAdmin();                  
+                        //Creamos el objeto USUARIO
+                        Usuario u1 = new Usuario();
+                        u1.setTipo_usr("Administrador");
+                        u1.setNombre_usr(usuario);
+                        u1.set_psw(contras);
+                        //Abrimos una nueva ventana
+                        vMenuAdmin mAdmin = new vMenuAdmin(u1);                  
                         mAdmin.setVisible(true);
                         this.dispose();
                     }
                     if(rs.getString("tipoUSR").equalsIgnoreCase("Cliente")){
-                        vMenuClient mClien = new vMenuClient();                        
+                         //Creamos el objeto USUARIO
+                        Usuario u2 = new Usuario();
+                        u2.setTipo_usr("Cliente");
+                        u2.setNombre_usr(usuario);
+                        u2.set_psw(contras);
+                         //Abrimos una nueva ventana
+                        usuario = rs.getString("tipoUSR");
+                        vMenuClient mClien = new vMenuClient(u2);                        
                         mClien.setVisible(true);
                         this.dispose();
                     }

@@ -31,12 +31,15 @@ public class vMiCuenta extends JFrame implements ActionListener{
     public JTextField jtf_usr;
     public JPasswordField jtf_psw;
     
+    public Usuario uvMiCuenta;
+    
     //CONTRUCTOR DE VENTANA
-    public vMiCuenta(){
+    public vMiCuenta(Usuario u){
         setSize(800, 550);
         setTitle("Mi Cuenta");
         setLocationRelativeTo(null);
-        setResizable(false);        
+        setResizable(false);   
+        uvMiCuenta = u;
         iniciaComponentes();
         setDefaultCloseOperation(EXIT_ON_CLOSE); 
     }
@@ -161,7 +164,7 @@ public class vMiCuenta extends JFrame implements ActionListener{
         btn_regresar.setFont(new Font("arial", 1, 20));
         btn_regresar.setBackground(new Color(185, 170, 220));
         panel.add(btn_regresar);
-       // btn_regresar.addActionListener(this);
+        btn_regresar.addActionListener(this);
        
        //Boton "cerrar sesion"
         btn_cerrar_sesion = new JButton("Cerrar Sesion");
@@ -214,6 +217,8 @@ public class vMiCuenta extends JFrame implements ActionListener{
             JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(respuesta == 0){
                 //jtf_apellidos.setEditable(true);
+                jtf_apellidoP.setEditable(true);
+                jtf_apellidoM.setEditable(true);
                 jtf_nombres.setEditable(true);
                 jtf_email.setEditable(true);        
                 jtf_usr.setEditable(true);
@@ -226,7 +231,8 @@ public class vMiCuenta extends JFrame implements ActionListener{
             int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea guardar cambios?", "Guardar cambios", 
             JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(respuesta == 0){
-               // jtf_apellidos.setEditable(false);
+                jtf_apellidoP.setEditable(false);
+                jtf_apellidoM.setEditable(false);
                 jtf_nombres.setEditable(false);
                 jtf_email.setEditable(false);        
                 jtf_usr.setEditable(false);
@@ -248,8 +254,17 @@ public class vMiCuenta extends JFrame implements ActionListener{
             }
         }
     //Evento para el boton regresar
-    if(e.getSource() == btn_regresar){
-        
-    }
+        if(e.getSource() == btn_regresar){
+            if(uvMiCuenta.getTipo_usr().equalsIgnoreCase("Administrador")){
+                vMenuAdmin vma = new vMenuAdmin(uvMiCuenta);
+                vma.setVisible(true);
+                this.dispose();
+            }
+            if(uvMiCuenta.getTipo_usr().equalsIgnoreCase("Cliente")){
+                vMenuClient vmc = new vMenuClient(uvMiCuenta);
+                vmc.setVisible(true);
+                this.dispose();
+            }
+        }
     }//FIN DEL METODO DE LOS EVENTOS  
 }//FIN DE LA CLASE

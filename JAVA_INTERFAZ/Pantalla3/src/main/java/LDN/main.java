@@ -10,8 +10,8 @@ import View.vRegistrarse;
 public class main {
     
     public static void main(String args[]){
-       //vLogin Proyecto = new vLogin();
-       //Proyecto.setVisible(true);        
+       vLogin Proyecto = new vLogin();
+       Proyecto.setVisible(true);        
        
         //vMiCuenta cuenta = new vMiCuenta();
         //cuenta.setVisible(true);       
@@ -25,7 +25,7 @@ public class main {
         //vRegistrarse reg = new vRegistrarse();
         //reg.setVisible(true);
        
-       vRegAdmin vRA = new vRegAdmin();
-       vRA.setVisible(true);
+       //vRegAdmin vRA = new vRegAdmin();
+       //vRA.setVisible(true);
     }
 }

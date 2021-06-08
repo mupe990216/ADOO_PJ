@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -28,13 +29,15 @@ public class vRegCliente extends JFrame implements ActionListener {
     public JTextField jtf_email;
     public JTextField jtf_usr;
     public JPasswordField jtf_psw;
+    public Usuario uvrc;
     
     //METODOS
-    public vRegCliente(){
+    public vRegCliente(Usuario u){
         setSize(800, 550);
         setTitle("Nuevo Cliente");
         setLocationRelativeTo(null);
-        setResizable(false);        
+        setResizable(false);     
+        uvrc = u;
         iniciaComponentes();
         setDefaultCloseOperation(EXIT_ON_CLOSE); 
     }
@@ -55,7 +58,7 @@ public class vRegCliente extends JFrame implements ActionListener {
         jtf_apellidoP.setFont(new Font("arial", 1, 18));
         //jtf_apellidoP.setText("Ramirez Galindo");
         jtf_apellidoP.setBackground(new Color(180, 210, 240));
-        jtf_apellidoP.setEditable(false);
+        jtf_apellidoP.setEditable(true);
         panel.add(jtf_apellidoP);
         
         //Caja de apellido Materno
@@ -63,7 +66,7 @@ public class vRegCliente extends JFrame implements ActionListener {
         jtf_apellidoM.setBounds(50,150,200,40);
         jtf_apellidoM.setFont(new Font("arial", 1, 18));
         jtf_apellidoM.setBackground(new Color(180, 210, 240));
-        jtf_apellidoM.setEditable(false);
+        jtf_apellidoM.setEditable(true);
         panel.add(jtf_apellidoM);
         
         //Caja de Nombre
@@ -71,7 +74,7 @@ public class vRegCliente extends JFrame implements ActionListener {
         jtf_nombres.setBounds(50,250,200,40);
         jtf_nombres.setFont(new Font("arial", 1, 18));
         jtf_nombres.setBackground(new Color(180, 210, 240));
-        jtf_nombres.setEditable(false);
+        jtf_nombres.setEditable(true);
         panel.add(jtf_nombres);
         
         //Caja de email
@@ -79,7 +82,7 @@ public class vRegCliente extends JFrame implements ActionListener {
         jtf_email.setBounds(50,350,200,40);
         jtf_email.setFont(new Font("arial", 1, 18));
         jtf_email.setBackground(new Color(180, 210, 240));
-        jtf_email.setEditable(false);
+        jtf_email.setEditable(true);
         panel.add(jtf_email);
         
         //Caja de usr
@@ -224,7 +227,32 @@ public class vRegCliente extends JFrame implements ActionListener {
     //EVENTOS
     @Override
     public void actionPerformed(ActionEvent e) {
+        //EVENTO PARA REGRESAR
+        if(e.getSource() == btn_regresar){
+            int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea salir del sistema?\nNo se guardarán los cambios", "Confirmar salida",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(respuesta == 0){
+                vGestcliente vgc = new vGestcliente(uvrc);
+                vgc.setVisible(true);
+                this.dispose();
+            }
+        }
+        //EVENTO PARA CERRAR SESION
+        if(e.getSource() == btn_cerrar_sesion){
+            vLogin LG = new vLogin();
+            LG.setVisible(true);
+            this.dispose();
+        }
         
+        //EVENTO PARA FINALIZAR
+        if(e.getSource() == btn_finalizar){
+            //CONEXION A LA BASE DE DATOS
+            
+            //REGRESAMOS A LA VENTANA DE vGestcliente
+            vGestcliente vgc = new vGestcliente(uvrc);
+            vgc.setVisible(true);
+            this.dispose();
+        }
     }
     
 }

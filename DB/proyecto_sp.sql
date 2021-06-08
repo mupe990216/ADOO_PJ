@@ -67,7 +67,7 @@ set existe = (select count(*) from Persona where persona.Email=correo);
     select msj as Respuesta;
 end **
 delimiter ;
-
+call sp_AltaAdmin('nombre','apellidoP','apellidoM','correo','nusr','psw');
 
 ##---------------------------------- Baja de Administrador ----------------------------------
 drop procedure if exists sp_BajaAdmin;
@@ -259,3 +259,4 @@ set existe = (select count(*) from perona where persona.Email=correo);
 	select msj as Respuesta;
 end **
 delimiter ;
+select *from Persona;
