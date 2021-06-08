@@ -51,7 +51,7 @@ set existe = (select count(*) from credencial where credencial.Usuario = usur);
         select msj as Respuesta;
             else
 				select persona.ApePaterno as "Apellido Paterno", persona.ApeMaterno as "Apellido Materno", 
-                persona.Nombre as "Nombre(s)", persona.Email, persona.Usuario as "Nombre de usuario", credencial.contrasenia 
+                persona.Nombre as "Nombre(s)", persona.Email, persona.Usuario as "Nombre de usuario", credencial.contrasenia as "Contraseña"
                 from persona inner join credencial on persona.Usuario=credencial.Usuario and persona.Usuario=usur;
 	end if;			
 end **
