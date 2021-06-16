@@ -2,11 +2,15 @@
 package View;
 
 //Bibliotecas
+import DB.cDatos;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,13 +26,11 @@ public class vRegistrarse extends JFrame implements ActionListener{
     public JPanel panel;
     public JLabel jbl_fondo, jbl_dialogo;
     public JLabel jbl_apellidoP,jbl_apellidoM, jbl_nombre,jbl_email,usr,psw,jbl_im1,jbl_im2;
-    public JButton btn_finalizar;
-    public JButton btn_regresar;
-    public JTextField jtf_apellidoP,jtf_apellidoM;
-    public JTextField jtf_nombres;
-    public JTextField jtf_email;
-    public JTextField jtf_usr;
+    public JButton btn_finalizar,btn_regresar;
+    public JTextField jtf_apellidoP,jtf_apellidoM,jtf_nombres,jtf_email,jtf_usr;
     public JPasswordField jtf_psw;
+    public String ApellidoP, ApellidoM, Nombre,Email,n_usr,spsw;
+    
     //METODOS
     
     public vRegistrarse(){
@@ -56,7 +58,7 @@ public class vRegistrarse extends JFrame implements ActionListener{
         jtf_apellidoP.setFont(new Font("arial", 1, 18));
         //jtf_apellidoP.setText("Ramirez Galindo");
         jtf_apellidoP.setBackground(new Color(180, 210, 240));
-        jtf_apellidoP.setEditable(false);
+        jtf_apellidoP.setEditable(true);
         panel.add(jtf_apellidoP);
         
         //Caja de apellido Materno
@@ -64,7 +66,7 @@ public class vRegistrarse extends JFrame implements ActionListener{
         jtf_apellidoM.setBounds(50,150,200,40);
         jtf_apellidoM.setFont(new Font("arial", 1, 18));
         jtf_apellidoM.setBackground(new Color(180, 210, 240));
-        jtf_apellidoM.setEditable(false);
+        jtf_apellidoM.setEditable(true);
         panel.add(jtf_apellidoM);
         
         //Caja de Nombre
@@ -72,7 +74,7 @@ public class vRegistrarse extends JFrame implements ActionListener{
         jtf_nombres.setBounds(50,250,200,40);
         jtf_nombres.setFont(new Font("arial", 1, 18));
         jtf_nombres.setBackground(new Color(180, 210, 240));
-        jtf_nombres.setEditable(false);
+        jtf_nombres.setEditable(true);
         panel.add(jtf_nombres);
         
         //Caja de email
@@ -80,7 +82,7 @@ public class vRegistrarse extends JFrame implements ActionListener{
         jtf_email.setBounds(50,350,200,40);
         jtf_email.setFont(new Font("arial", 1, 18));
         jtf_email.setBackground(new Color(180, 210, 240));
-        jtf_email.setEditable(false);
+        jtf_email.setEditable(true);
         panel.add(jtf_email);
         
         //Caja de usr
@@ -211,6 +213,26 @@ public class vRegistrarse extends JFrame implements ActionListener{
         jbl_fondo.setIcon(new ImageIcon(logo_icono.getImage().getScaledInstance(jbl_fondo.getWidth(), jbl_fondo.getHeight(), Image.SCALE_SMOOTH)));
         panel.add(jbl_fondo);
     }
+     
+     //Verificar si los jtf estan vacios
+    private int jtfVacio(){
+         //String ApellidoP,ApellidoM,Nombre,email,usr,psw;
+         ApellidoP = jtf_apellidoP.getText();
+         ApellidoM = jtf_apellidoM.getText();
+         Nombre = jtf_nombres.getText();
+         Email = jtf_email.getText();
+         n_usr = jtf_usr.getText();
+         spsw = "";
+         for(int i = 0;i < jtf_psw.getPassword().length;i++){
+             spsw += jtf_psw.getPassword()[i];
+         }
+         if(ApellidoP.equals("") || ApellidoM.equals("") || Nombre.equals("") || Email.equals("") || n_usr.equals("") || spsw.equals("")){
+             return 1;
+         }
+         else{
+             return 0;
+         }
+     }
     //EVENTOS 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -230,12 +252,37 @@ public class vRegistrarse extends JFrame implements ActionListener{
         }
         //Evento para el boton finalizar
         if(e.getSource() == btn_finalizar){
-            //ESPACIO PARA HACER LA CONEXION A LA BASE DE DATOS 
-            
-            //CAMBIO DE VENTANA 
-            vLogin va_de_nuez = new vLogin();
-            va_de_nuez.setVisible(true);
-            this.dispose();
+            int vacio = jtfVacio();
+            int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea finalizar el registro?", "Confirmar registro",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            //SI LA RESPUESTA FUE QUE SI 
+            if (respuesta == 0) {
+               //VERIFICAMOS SI NO ESTAN VACIOS 
+                if(vacio == 0){
+                    cDatos datitos = new cDatos(); //Creo un objeto de la clase para conectar a MySQL
+                    try{
+                        Connection conn = datitos.conecta(); 
+                        ResultSet rs = datitos.consulta("call sp_AltaUsuario('"+Email+"','"+Nombre+"','"+ApellidoP+"','"+ApellidoM+"','"+n_usr+"','"+spsw+"');",
+                                conn); // Ejecuta sentencia SQL y regresa las coincidencias
+                        while(rs.next()){
+                            JOptionPane.showMessageDialog(null, rs.getString("Respuesta")); //Columna Respuesta
+                        }
+                        rs.close();
+                        conn.close();
+                    } catch(SQLException ex){
+                        System.out.println("Error al registrarse en SAY WOOF!: " + ex.getMessage());
+                    }
+                    //Una vez agregado el usr cliente  regresamos a la ventana anterior
+                    //CAMBIO DE VENTANA 
+                    vLogin va_de_nuez = new vLogin();
+                    va_de_nuez.setVisible(true);
+                    this.dispose();
+               }
+                //SI ESTAN VACIOS
+                else{
+                   JOptionPane.showMessageDialog(null, "Complete todos los campos");
+                }
+            }
         }
     }
     

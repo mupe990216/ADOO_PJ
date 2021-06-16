@@ -3,11 +3,15 @@ package View;
 
 //VENTANA MI CUENTA 
 
+import DB.cDatos;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,13 +26,10 @@ public class vMiCuenta extends JFrame implements ActionListener{
     public JPanel panel;
     public JLabel jbl_fondo;
     public JLabel jbl_apellidoP,jbl_apellidoM, jbl_nombre,jbl_email,usr,psw;
-    public JButton btn_cerrar_sesion;
-    public JButton btn_regresar;
+    public JButton btn_cerrar_sesion,btn_regresar;
     public JButton btn_actualiza_info, btn_save;
     public JTextField jtf_apellidoP,jtf_apellidoM;
-    public JTextField jtf_nombres;
-    public JTextField jtf_email;
-    public JTextField jtf_usr;
+    public JTextField jtf_nombres,jtf_email,jtf_usr;
     public JPasswordField jtf_psw;
     
     public Usuario uvMiCuenta;
@@ -49,9 +50,30 @@ public class vMiCuenta extends JFrame implements ActionListener{
         //AQUI LLAMAMOS TODOS LOS METODOS DE CADA COMPONENTE DE LA VENTANA
         colocaPanel();
         colocaBotones();
+        llenadoInfo();
         colocaCajasTexto();
         colocaEtiquetas();
         colocaFondo();
+    }
+    //LLENAMOS LAS CAJAS DE TEXTO 
+    private void llenadoInfo(){
+         cDatos datitos = new cDatos(); //Creo un objeto de la clase para conectar a MySQL
+        try{
+            Connection conn = datitos.conecta();
+            // Ejecuta sentencia SQL y regresa las coincidencias
+            ResultSet rs = datitos.consulta("call sp_VerMiCuenta('" +uvMiCuenta.getNoombre_usr()+ "','" +uvMiCuenta.getPSW()+ "');",
+                    conn); 
+            while(rs.next()){
+                uvMiCuenta.setApellidoP(rs.getString("Apellido Paterno"));
+                uvMiCuenta.setApellidoM(rs.getString("Apellido Materno"));
+                uvMiCuenta.setNombres(rs.getString("Nombre(s)"));
+                uvMiCuenta.setEmail(rs.getString("Email"));
+            }
+        rs.close();
+        conn.close();
+        } catch(SQLException ex){
+            System.out.println("Error al ver Mi Cuenta: " + ex.getMessage());
+        }
     }
     //Cajas de Texto
     private void colocaCajasTexto(){
@@ -59,7 +81,7 @@ public class vMiCuenta extends JFrame implements ActionListener{
         jtf_apellidoP = new JTextField();
         jtf_apellidoP.setBounds(50,50,200,40);
         jtf_apellidoP.setFont(new Font("arial", 1, 18));
-        //jtf_apellidoP.setText("Ramirez Galindo");
+        jtf_apellidoP.setText(uvMiCuenta.getApellidoP());
         jtf_apellidoP.setBackground(new Color(180, 210, 240));
         jtf_apellidoP.setEditable(false);
         panel.add(jtf_apellidoP);
@@ -68,6 +90,7 @@ public class vMiCuenta extends JFrame implements ActionListener{
         jtf_apellidoM = new JTextField();
         jtf_apellidoM.setBounds(50,150,200,40);
         jtf_apellidoM.setFont(new Font("arial", 1, 18));
+        jtf_apellidoM.setText(uvMiCuenta.getApellidoM());
         jtf_apellidoM.setBackground(new Color(180, 210, 240));
         jtf_apellidoM.setEditable(false);
         panel.add(jtf_apellidoM);
@@ -76,6 +99,7 @@ public class vMiCuenta extends JFrame implements ActionListener{
         jtf_nombres = new JTextField();
         jtf_nombres.setBounds(50,250,200,40);
         jtf_nombres.setFont(new Font("arial", 1, 18));
+        jtf_nombres.setText(uvMiCuenta.getNombres());
         jtf_nombres.setBackground(new Color(180, 210, 240));
         jtf_nombres.setEditable(false);
         panel.add(jtf_nombres);
@@ -84,6 +108,7 @@ public class vMiCuenta extends JFrame implements ActionListener{
         jtf_email = new JTextField();
         jtf_email.setBounds(50,350,200,40);
         jtf_email.setFont(new Font("arial", 1, 18));
+        jtf_email.setText(uvMiCuenta.getEmail());
         jtf_email.setBackground(new Color(180, 210, 240));
         jtf_email.setEditable(false);
         panel.add(jtf_email);
@@ -92,6 +117,7 @@ public class vMiCuenta extends JFrame implements ActionListener{
         jtf_usr = new JTextField();
         jtf_usr.setBounds(300,50,200,40);
         jtf_usr.setFont(new Font("arial", 1, 18));
+        jtf_usr.setText(uvMiCuenta.getNoombre_usr());
         jtf_usr.setBackground(new Color(180, 210, 240));
         jtf_usr.setEditable(false);
         panel.add(jtf_usr);
@@ -100,6 +126,7 @@ public class vMiCuenta extends JFrame implements ActionListener{
         jtf_psw = new JPasswordField();
         jtf_psw.setBounds(300,170,200,40);
         jtf_psw.setFont(new Font("arial", 1, 18));
+        jtf_psw.setText(uvMiCuenta.getPSW());
         jtf_psw.setBackground(new Color(180, 210, 240));
         jtf_psw.setEditable(false);
         panel.add(jtf_psw);

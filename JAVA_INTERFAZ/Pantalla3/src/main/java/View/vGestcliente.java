@@ -42,7 +42,7 @@ public class vGestcliente extends JFrame implements ActionListener{
     
     //Metodo de colocar boton
     public void colocaBotones(){
-        //Boton agregar nuevo administrador
+        //Boton agregar nuevo cliente
         btn_nCliente = new JButton();
         btn_nCliente.setBounds(100, 100, 160, 100);
         ImageIcon i1 = new ImageIcon("./img/Cliente/agregar_usr.png");
@@ -52,7 +52,7 @@ public class vGestcliente extends JFrame implements ActionListener{
         panel.add(btn_nCliente);
         btn_nCliente.addActionListener(this);
         
-        //Boton consultar Administradores
+        //Boton consultar Clientes
         btn_cCliente = new JButton();
         btn_cCliente.setBounds(400, 100, 160, 100);
         ImageIcon i2 = new ImageIcon("./img/Cliente/credencial2.png");
@@ -141,6 +141,13 @@ public class vGestcliente extends JFrame implements ActionListener{
         if(e.getSource() == btn_nCliente){
             vRegCliente RC = new vRegCliente(uvgc);
             RC.setVisible(true);
+            this.dispose();
+        }
+        
+        //EVENTO PARA CONSULTAR CLIENTE 
+        if(e.getSource() == btn_cCliente){
+            vConsultarC vCC = new vConsultarC(uvgc);
+            vCC.setVisible(true);
             this.dispose();
         }
     }

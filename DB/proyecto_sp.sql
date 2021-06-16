@@ -137,6 +137,7 @@ set existe = (select count(*) from persona where idTipoUsuario=1);
     end if;
 end **
 delimiter ;
+call sp_ConsultaAdmin('dsadsa');
 
 ##---------------------------------- Cambio Administrador ---------------------------------- 
 drop procedure if exists sp_CambioAdmin;
@@ -280,3 +281,4 @@ set existe = (select count(*) from perona where persona.Email=correo);
 end **
 delimiter ;
 select *from Persona;
+use Prueba;

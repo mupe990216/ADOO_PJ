@@ -1,11 +1,15 @@
 
 package View;
 //Bibliotecas
+import DB.cDatos;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,15 +25,13 @@ public class vRegCliente extends JFrame implements ActionListener {
     public JPanel panel;
     public JLabel jbl_fondo,jbl_im1;
     public JLabel jbl_apellidoP,jbl_apellidoM,jbl_nombre,jbl_email,usr,psw;
-    public JButton btn_cerrar_sesion;
-    public JButton btn_regresar;
+    public JButton btn_cerrar_sesion, btn_regresar;
     public JButton btn_actualiza_info, btn_finalizar;
     public JTextField jtf_apellidoP,jtf_apellidoM;
-    public JTextField jtf_nombres;
-    public JTextField jtf_email;
-    public JTextField jtf_usr;
+    public JTextField jtf_nombres, jtf_email, jtf_usr;
     public JPasswordField jtf_psw;
     public Usuario uvrc;
+    public String ApellidoP, ApellidoM, Nombres,Email,nombre_usr,spsw;
     
     //METODOS
     public vRegCliente(Usuario u){
@@ -207,17 +209,17 @@ public class vRegCliente extends JFrame implements ActionListener {
     
     //Verificar si los jtf estan vacios
     private int jtfVacio(){
-         String ApellidoP,ApellidoM,Nombre,email,usr,psw;
+         //String ApellidoP,ApellidoM,Nombre,email,usr,psw;
          ApellidoP = jtf_apellidoP.getText();
          ApellidoM = jtf_apellidoM.getText();
-         Nombre = jtf_nombres.getText();
-         email = jtf_email.getText();
-         usr = jtf_usr.getText();
-         psw = "";
+         Nombres = jtf_nombres.getText();
+         Email = jtf_email.getText();
+         nombre_usr = jtf_usr.getText();
+         spsw = "";
          for(int i = 0;i < jtf_psw.getPassword().length;i++){
-             psw += jtf_psw.getPassword()[i];
+             spsw += jtf_psw.getPassword()[i];
          }
-         if(ApellidoP.equals("") || ApellidoM.equals("") || Nombre.equals("") || email.equals("") || usr.equals("") || psw.equals("")){
+         if(ApellidoP.equals("") || ApellidoM.equals("") || Nombres.equals("") || Email.equals("") || nombre_usr.equals("") || spsw.equals("")){
              return 1;
          }
          else{
@@ -246,12 +248,36 @@ public class vRegCliente extends JFrame implements ActionListener {
         
         //EVENTO PARA FINALIZAR
         if(e.getSource() == btn_finalizar){
-            //CONEXION A LA BASE DE DATOS
-            
-            //REGRESAMOS A LA VENTANA DE vGestcliente
-            vGestcliente vgc = new vGestcliente(uvrc);
-            vgc.setVisible(true);
-            this.dispose();
+           int vacio = jtfVacio();
+            int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea finalizar el registro?", "Confirmar registro",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            //SI LA RESPUESTA FUE QUE SI 
+            if (respuesta == 0) {
+               //VERIFICAMOS SI NO ESTAN VACIOS 
+                if(vacio == 0){
+                    cDatos datitos = new cDatos(); //Creo un objeto de la clase para conectar a MySQL
+                    try{
+                        Connection conn = datitos.conecta(); 
+                        ResultSet rs = datitos.consulta("call sp_AltaUsuario('"+Email+"','"+Nombres+"','"+ApellidoP+"','"+ApellidoM+"','"+nombre_usr+"','"+spsw+"');",
+                                conn); // Ejecuta sentencia SQL y regresa las coincidencias
+                        while(rs.next()){
+                            JOptionPane.showMessageDialog(null, rs.getString("Respuesta")); //Columna Respuesta
+                        }
+                        rs.close();
+                        conn.close();
+                    } catch(SQLException ex){
+                        System.out.println("Error al registrar nuevo cliente: " + ex.getMessage());
+                    }
+                    //Una vez agregado el usr cliente  regresamos a la ventana anterior
+                    vGestcliente v1 = new vGestcliente(uvrc);
+                    v1.setVisible(true);
+                    this.dispose();
+               }
+                //SI ESTAN VACIOS
+                else{
+                   JOptionPane.showMessageDialog(null, "Complete todos los campos");
+                }
+            }
         }
     }
     

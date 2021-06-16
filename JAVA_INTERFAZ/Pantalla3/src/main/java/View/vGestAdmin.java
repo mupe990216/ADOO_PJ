@@ -149,7 +149,9 @@ public class vGestAdmin extends JFrame implements ActionListener{
         
         //EVENTO PARA CONSULTAR ADMINISTRADORES
         if(e.getSource() == btn_consultar){
-            
+            vConsultarA vCA = new vConsultarA(uvga);
+            vCA.setVisible(true);
+            this.dispose();
         }
     }//FIN DEL METODO DE EVENTOS
     

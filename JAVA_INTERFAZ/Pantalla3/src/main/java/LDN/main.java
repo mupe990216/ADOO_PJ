@@ -1,5 +1,7 @@
 package LDN;
 
+import View.Usuario;
+import View.vConsultarA;
 import View.vGestAdmin;
 import View.vGestcliente;
 import View.vLogin;
@@ -8,10 +10,10 @@ import View.vRegAdmin;
 import View.vRegistrarse;
 
 public class main {
-    
+    public static Usuario u = new Usuario();
     public static void main(String args[]){
-       vLogin Proyecto = new vLogin();
-       Proyecto.setVisible(true);        
+       //vLogin Proyecto = new vLogin();
+       //Proyecto.setVisible(true);        
        
         //vMiCuenta cuenta = new vMiCuenta();
         //cuenta.setVisible(true);       
@@ -27,5 +29,8 @@ public class main {
        
        //vRegAdmin vRA = new vRegAdmin();
        //vRA.setVisible(true);
+       
+       vConsultarA hola = new vConsultarA(u);
+       hola.setVisible(true);
     }
 }

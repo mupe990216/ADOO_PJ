@@ -136,8 +136,7 @@ public class vLogin extends JFrame implements ActionListener {
                 //RESULSET = conjunto de resultados de una sentencia SQL
                 ResultSet rs = datitos.consulta("call sp_Login('" + usuario + "','" + contras + "');", conn); // Ejecuta sentencia SQL y regresa las coincidencias
                 while (rs.next()) { //next() => mientras haya algo que leer en de la consulta
-                    //JOptionPane.showMessageDialog(null, rs.getString("Respuesta")); //Columna Respuesta
-                    //JOptionPane.showMessageDialog(null, rs.getString("tipoUSR")); //Columna tipo usr
+                    JOptionPane.showMessageDialog(null, rs.getString("Respuesta")); //Columna Respuesta
                     if(rs.getString("tipoUSR").equalsIgnoreCase("Administrador")){
                         //Creamos el objeto USUARIO
                         Usuario u1 = new Usuario();

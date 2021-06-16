@@ -257,7 +257,7 @@ public class vRegAdmin extends JFrame implements ActionListener{
                         rs.close();
                         conn.close();
                     } catch(SQLException ex){
-                        System.out.println("Error al iniciar Sesion: " + ex.getMessage());
+                        System.out.println("Error al registrar nuevo administrador: " + ex.getMessage());
                     }
                     //Una vez agregada regresamos a la ventana anterior
                     vGestAdmin v1 = new vGestAdmin(uvra);
